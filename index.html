@@ -17,68 +17,49 @@
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 
 
-    <!--------------------------------->
-    <!-- FROM HERE ON IT IS HW3 stuff-->
-    <!--------------------------------->
+    <!-- our vis classes-->
+    <script src = "js/statevis.js"></script>
+    <script src = "js/restaurantvis.js"></script>
+    <script src = "js/healthvis.js"></script>
 
-    <!-- add own vis classes-->
-    <!--
-	<script src = "js/priovis.js"></script>
-    <script src = "js/agevis.js"></script>
-    <script src = "js/countvis.js"></script>
-	-->
-    <!-- add own stylesheet-->
+    <!--  our stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 
 </head>
 <body>
     <div class="container">
-        <h1>Homework 3 - MyWorld 2015 Data Visualization</h1>
+        <h1>Fast Food and Health in the United Staes</h1>
 
         <div class="row">
             <div class="col-md-8 col-sm-12">
-               <p> The following visualization shows you the votes for MyWorld 2015. You can select a time range to see changes in the distribution of votes und distribution of age of the voters.</p>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
-                <b>current brush:</b> <span id="brushInfo"></span>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-md-9" id="countVis">
-                <p> <span><br> Number of Votes -- Brush to Select Range: </span></p>
-            </div>
-            <div class="col-md-3" id="ageVis">
-                <p><span><br> Age Distribution </span></p>
+               <p> The following visualization shows you the location of restaurants from four major 
+                fast food chains in the United States. It also shows you health data for the 50 States</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12" id="prioVis">
-                <p> <span><br> Distribution of Priorities: </span></p>
+            <div class="col-sm-2"></div>
+            <div class="col-md-10" id="stateVis">
+                <p> <span><br> Interact with map to pull up health data: </span></p>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" id="restaurantVis">
+                <p><span><br> Restaurants per Capita: </span></p>
+            </div>
+            <div class="col-md-6" id="healthVis">
+                <p> <span><br> Health Facts: </span></p>
             </div>
 
         </div>
-
-
-
-
-
-
     </div>
 
 
 
     <script>
         $(function(){ // this function is called after the HTML document is fully loaded
-
 
             //==========================================
             //--- HERE IS WHERE ALL THE MAGIC STARTS --
@@ -89,12 +70,6 @@
             var restaurantData = [];
             var healthData = {};
 
-            // this function can convert Date objects to a string
-            // it can also convert strings to Date objects
-            // see: https://github.com/mbostock/d3/wiki/Time-Formatting
-            var dateFormatter = d3.time.format("%Y-%m-%d");
-
-
             // call this function after Data is loaded, reformatted and bound to the variables
             var initVis = function(){
 
@@ -102,18 +77,17 @@
                 var MyEventHandler = new Object();
 
                 //TODO: Instantiate all Vis Objects here
-                var count_vis = new CountVis(d3.select("#countVis"), allData, metaData, MyEventHandler);
-                var prio_vis = new PrioVis(d3.select("#prioVis"), allData, metaData, MyEventHandler);
-                var age_vis = new AgeVis(d3.select("#ageVis"), allData, metaData,      MyEventHandler);
+                var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, healthData, MyEventHandler);
+                //var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, healthData, MyEventHandler);
+                //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
 
                 // TODO: bind the eventHandler to the Vis Objects
                 // events will be created from the CountVis object (nothing to do here)
                 // events will be consumed by the PrioVis and AgeVis object (binding should happen here)
 
                 $(MyEventHandler).bind("selectionChanged", function(event, brushRange){
-              
-                    prio_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
-                    age_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
+                    //restaurant_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
+                    //health_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
                 });
 
             }
@@ -136,7 +110,6 @@
                     .await(dataLoaded);
 
             }
-
             
             startHere();
 
