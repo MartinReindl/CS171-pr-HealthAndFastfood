@@ -6,6 +6,7 @@
 
     <!-- ADD Libraries-->
     <script src="libs/d3/d3.min.js" charset="utf-8"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="libs/queue-master/queue.min.js"></script>
@@ -19,8 +20,8 @@
 
     <!-- our vis classes-->
     <script src = "js/statevis.js"></script>
-    <script src = "js/restaurantvis.js"></script>
-    <script src = "js/healthvis.js"></script>
+    <!--<script src = "js/restaurantvis.js"></script>
+    <script src = "js/healthvis.js"></script> --> 
 
     <!--  our stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
@@ -31,26 +32,17 @@
         <h1>Fast Food and Health in the United Staes</h1>
 
         <div class="row">
-            <div class="col-md-8 col-sm-12">
-               <p> The following visualization shows you the location of restaurants from four major 
-                fast food chains in the United States. It also shows you health data for the 50 States</p>
+            <div class="col-md-2"></div>
+            <div class="col-md-8" id="stateVis">
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-md-10" id="stateVis">
-                <p> <span><br> Interact with map to pull up health data: </span></p>
-            </div>
-            <div class="col-sm-2"></div>
+            <div class="col-md-2"></div>
         </div>
 
         <div class="row">
             <div class="col-md-6" id="restaurantVis">
-                <p><span><br> Restaurants per Capita: </span></p>
+
             </div>
             <div class="col-md-6" id="healthVis">
-                <p> <span><br> Health Facts: </span></p>
             </div>
 
         </div>
@@ -68,7 +60,8 @@
 
             // variables keeping global knowledge of the data
             var restaurantData = [];
-            var healthData = {};
+            var healthData = [];
+            var usData = {};
 
             // call this function after Data is loaded, reformatted and bound to the variables
             var initVis = function(){
@@ -77,7 +70,7 @@
                 var MyEventHandler = new Object();
 
                 //TODO: Instantiate all Vis Objects here
-                var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, healthData, MyEventHandler);
+                var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, healthData, usData, MyEventHandler);
                 //var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, healthData, MyEventHandler);
                 //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
 
@@ -93,11 +86,17 @@
             }
 
             // call this function after both files are loaded -- error should be "null" if no error
-            var dataLoaded = function (error, _restaurantData, _healthData) {
+            var dataLoaded = function (error, _restaurantData, _healthData, _usData) {
 
                 if (!error) {
 					console.log(_restaurantData)
 					console.log(_healthData)
+                    console.log(_usData)
+
+                    restaurantData = _restaurantData;
+                    healthData = _healthData; 
+                    usData = _usData; 
+
                     initVis();
                 }
             }
@@ -107,6 +106,7 @@
 				queue()
                     .defer(d3.csv, 'data/restaurants_with_states.csv') 
                     .defer(d3.csv, 'data/aggregated_health_information_by_state.csv') 
+                    .defer(d3.json, 'data/us.json')
                     .await(dataLoaded);
 
             }
