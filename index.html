@@ -55,6 +55,11 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class='col-sm-4' id='restaurantVis'></div>
+        <div class='col-sm-4'></div>
+        <div class='col-sm-4' id='healthVis'></div>
+    </div>
 
 
 
@@ -87,7 +92,7 @@
                 //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
 
                 $(MyEventHandler).bind("selectionChanged", function(event, _selection){
-                    console.log(_selectionInfo);
+                    
                     restaurant_vis.onSelectionChange(_selection);
                     //health_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
                 });
