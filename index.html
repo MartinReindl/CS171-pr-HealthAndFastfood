@@ -20,42 +20,47 @@
 
     <!-- our vis classes-->
     <script src = "js/statevis.js"></script>
-    <!--<script src = "js/restaurantvis.js"></script>
-    <script src = "js/healthvis.js"></script> --> 
+    <script src = "js/restaurantvis.js"></script>
+    <!--<script src = "js/healthvis.js"></script> --> 
 
     <!--  our stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 
 </head>
 <body>
-    Restaurant Filter:<input type="checkbox" id="starbucks" value="starbucks"/>
-	<label for="starbucks">Starbucks</label>
-	<input type="checkbox" id="mcdonalds" value="mcdonalds"/>
-	<label for="mcdonalds">McDonald's</label>
-	<input type="checkbox" id="burgerking" value="burgerking"/>
-	<label for="burgerking">Burger King</label>
-	<input type="checkbox" id="dq" value="dq"/>
-	<label for="dq">Dairy Queen</label>
-	<form action="">Health Measure to Display:
-		<input type="radio" name="health_measure" value="obesity" checked> Obesity
-		<input type="radio" name="health_measure" 
-		       value="cardiovascular_disease"> Cardiovascular Disease
-		<input type="radio" name="health_measure" value="diabetes"> Diabetes
-		<input type="radio" name="health_measure" value="mental_health"> Mental Health
-	</form>
-    <div class="container">
-        <h1><center>Fast Food and Health in the United States</center></h1>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-10" id="stateVis">
-            </div><div class="col-md-2"></div>
+
+    <h1><center>Fast Food and Health in the United States</center></h1>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+             Restaurant Filter:<br>
+            <input type="checkbox" id="starbucks" value="starbucks"/>
+            <label for="starbucks">Starbucks</label><br>
+            <input type="checkbox" id="mcdonalds" value="mcdonalds"/>
+            <label for="mcdonalds">McDonald's</label><br>
+            <input type="checkbox" id="burgerking" value="burgerking"/>
+            <label for="burgerking">Burger King</label><br>
+            <input type="checkbox" id="dq" value="dq"/>
+            <label for="dq">Dairy Queen</label>
+        </div>
+        <div class="col-md-7" id="stateVis">
+        </div>
+        <div class="col-md-2">
+            <form action="">Health Measure to Display:<br>
+                <input type="radio" name="health_measure" value="obesity" checked> Obesity<br>
+                <input type="radio" name="health_measure" 
+                       value="cardiovascular_disease"> Cardiovascular Disease<br>
+                <input type="radio" name="health_measure" value="diabetes"> Diabetes<br>
+                <input type="radio" name="health_measure" value="mental_health"> Mental Health<br>
+            </form>
         </div>
     </div>
 
 
 
+
     <script>
-        $(function(){ // this function is called after the HTML document is fully loaded
+        $(function(){ 
 
             //==========================================
             //--- HERE IS WHERE ALL THE MAGIC STARTS --
@@ -78,16 +83,12 @@
 
                 //TODO: Instantiate all Vis Objects here
                 var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, mapData, stateData, MyEventHandler);
-                //var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, healthData, MyEventHandler);
+                var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, mapData, stateData, MyEventHandler);
                 //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
 
-                // TODO: bind the eventHandler to the Vis Objects
-                // events will be created from the CountVis object (nothing to do here)
-                // events will be consumed by the PrioVis and AgeVis object (binding should happen here)
-
-                $(MyEventHandler).bind("selectionChanged", function(event, _selectionInfo){
+                $(MyEventHandler).bind("selectionChanged", function(event, _selection){
                     console.log(_selectionInfo);
-                    //restaurant_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
+                    restaurant_vis.onSelectionChange(_selection);
                     //health_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
                 });
 
