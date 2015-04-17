@@ -2,11 +2,11 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Homework 3 - MyWorld Data</title>
+    <title>Fast Food and Health in the US</title>
 
     <!-- ADD Libraries-->
     <script src="libs/d3/d3.min.js" charset="utf-8"></script>
-    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="libs/topojson/topojson.v1.min.js"></script>
     <script src="libs/jquery/jquery-2.1.1.min.js" charset="utf-8"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="libs/queue-master/queue.min.js"></script>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
 
     <!-- Get some nice font-->
-    <link rel="stylesheet" type="text/css" href="css/font.css">
+   <link rel="stylesheet" type="text/css" href="css/font.css">
 
 
     <!-- our vis classes-->
@@ -29,22 +29,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Fast Food and Health in the United Staes</h1>
+        <h1><center>Fast Food and Health in the United States</center></h1>
 
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8" id="stateVis">
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6" id="restaurantVis">
-
-            </div>
-            <div class="col-md-6" id="healthVis">
-            </div>
-
+            <div class="col-md-10" id="stateVis">
+            </div><div class="col-md-2"></div>
         </div>
     </div>
 
@@ -89,9 +79,6 @@
             var dataLoaded = function (error, _restaurantData, _healthData, _usData) {
 
                 if (!error) {
-					console.log(_restaurantData)
-					console.log(_healthData)
-                    console.log(_usData)
 
                     restaurantData = _restaurantData;
                     healthData = _healthData; 
