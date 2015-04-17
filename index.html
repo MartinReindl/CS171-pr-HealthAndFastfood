@@ -28,9 +28,23 @@
 
 </head>
 <body>
+    Restaurant Filter:<input type="checkbox" id="starbucks" value="starbucks"/>
+	<label for="starbucks">Starbucks</label>
+	<input type="checkbox" id="mcdonalds" value="mcdonalds"/>
+	<label for="mcdonalds">McDonald's</label>
+	<input type="checkbox" id="burgerking" value="burgerking"/>
+	<label for="burgerking">Burger King</label>
+	<input type="checkbox" id="dq" value="dq"/>
+	<label for="dq">Dairy Queen</label>
+	<form action="">Health Measure to Display:
+		<input type="radio" name="health_measure" value="obesity" checked> Obesity
+		<input type="radio" name="health_measure" 
+		       value="cardiovascular_disease"> Cardiovascular Disease
+		<input type="radio" name="health_measure" value="diabetes"> Diabetes
+		<input type="radio" name="health_measure" value="mental_health"> Mental Health
+	</form>
     <div class="container">
         <h1><center>Fast Food and Health in the United States</center></h1>
-
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-10" id="stateVis">
@@ -52,6 +66,9 @@
             var restaurantData = [];
             var mapData = {};
             var stateData = [];
+			var restaurant_filter = "none"
+			var health_measure_selection = "obesity"
+
 
             // call this function after Data is loaded, reformatted and bound to the variables
             var initVis = function(){
