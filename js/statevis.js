@@ -14,17 +14,17 @@
  * @param _eventHandler -- the Eventhandling Object to emit data to 
  * @constructor
  */
-StateVis = function(_parentElement, _restaurantData, _healthData, _usData, _eventHandler){
+StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _eventHandler){
 
+    // data 
     this.parentElement = _parentElement;
     this.restaurantData = _restaurantData;
-    this.healthData = _healthData;
-    this.usData = _usData;
+    this.mapData = _mapData;
+    this.stateData = _stateData;
     this.eventHandler = _eventHandler;
     this.displayData = [];
 
-    console.log(_parentElement);
-    // TODO: define all "constants" here
+    // constants
     this.margin = {top: 0, right: 0, bottom: 0, left: 0},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left - this.margin.right,
     this.height = 500 - this.margin.top - this.margin.bottom;
@@ -54,26 +54,22 @@ StateVis.prototype.initVis = function(){
         .attr("width", this.width + this.margin.left + this.margin.right)
         .attr("height", this.height + this.margin.top + this.margin.bottom);
 
-    this.svg.append("rect")
-        .attr("class", "background")
-        .attr("width", this.width)
-        .attr("height", this.height)
-        .on("dblclick", function (d) {that.doubleClicked (d)});
-
     this.g = this.svg.append("g");
     
     this.g.append("g")
-        .attr("id", "states")
+            .attr("id", "states")
         .selectAll("path")
-        .data(topojson.feature(that.usData, that.usData.objects.states).features)
-        .enter().append("path")
+            .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
+            .enter().append("path")
             .attr("d", that.path)
-            .on("dblclick", function (d) {that.doubleClicked (d)});
+            .on("dblclick", function (d) {that.doubleClicked (d)})
+            .on("click", function (d) {that.clicked (d)});
 
     this.g.append("path")
-        .datum(topojson.mesh(that.usData, that.usData.objects.states, function(a, b) { return a !== b; }))
+        .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
         .attr("id", "state-borders")
-        .attr("d", that.path);
+        .attr("d", that.path)
+        .attr("fill", "blue");
 
 
 
@@ -166,8 +162,14 @@ StateVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
  * ==================================
  *
  * */
+
+/*
+ * doubleClicked allows a user to zoom in onto the map 
+ * @ parameter d is the state selected
+ */ 
+
 StateVis.prototype.doubleClicked = function (d){
-    console.log(d);
+
     that = this; 
     
     var x, y, k;
@@ -185,6 +187,7 @@ StateVis.prototype.doubleClicked = function (d){
         that.centered = null;
     }
 
+
     this.g.selectAll("path")
         .classed("active", that.centered && function(d) { return d === that.centered; });
 
@@ -196,24 +199,26 @@ StateVis.prototype.doubleClicked = function (d){
 }
 
 
-/**
- * brush function is called when user interacts with chart to call 
- * event handler and update the current brush text
+/*
+ * clickd allows a user to select a state 
+ * @ parameter d is the selected state
  */ 
-StateVis.prototype.brushed = function(){
 
-
-
-    // create object to pass into event handler
-    var brushRange = {startDate: this.brush.extent()[0], 
-                        endDate: this.brush.extent()[1]};
-
-
+StateVis.prototype.clicked = function (selection){
+    
+    // find information on selection
+    var selectionInfo; 
+    this.stateData.forEach(function (e) {
+        if (selection.id == e.id) {
+            selectionInfo = e; 
+        }
+    });
 
     // trigger event handler
-    $(this.eventHandler).trigger("selectionChanged", brushRange);
-       
+    $(this.eventHandler).trigger("selectionChanged", selectionInfo);
 }
+
+
 
 
 

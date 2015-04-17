@@ -50,8 +50,8 @@
 
             // variables keeping global knowledge of the data
             var restaurantData = [];
-            var healthData = [];
-            var usData = {};
+            var mapData = {};
+            var stateData = [];
 
             // call this function after Data is loaded, reformatted and bound to the variables
             var initVis = function(){
@@ -60,7 +60,7 @@
                 var MyEventHandler = new Object();
 
                 //TODO: Instantiate all Vis Objects here
-                var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, healthData, usData, MyEventHandler);
+                var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, mapData, stateData, MyEventHandler);
                 //var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, healthData, MyEventHandler);
                 //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
 
@@ -68,7 +68,8 @@
                 // events will be created from the CountVis object (nothing to do here)
                 // events will be consumed by the PrioVis and AgeVis object (binding should happen here)
 
-                $(MyEventHandler).bind("selectionChanged", function(event, brushRange){
+                $(MyEventHandler).bind("selectionChanged", function(event, _selectionInfo){
+                    console.log(_selectionInfo);
                     //restaurant_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
                     //health_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
                 });
@@ -76,13 +77,19 @@
             }
 
             // call this function after both files are loaded -- error should be "null" if no error
-            var dataLoaded = function (error, _restaurantData, _healthData, _usData) {
+            var dataLoaded = function (error, _restaurantData, _mapData, _stateData) {
 
                 if (!error) {
 
                     restaurantData = _restaurantData;
-                    healthData = _healthData; 
-                    usData = _usData; 
+                    mapData = _mapData; 
+                    stateData = _stateData;
+
+
+
+                    console.log(restaurantData);
+                    console.log(mapData);
+                    console.log(stateData);
 
                     initVis();
                 }
@@ -91,9 +98,9 @@
             var startHere = function(){
                 // load data
 				queue()
-                    .defer(d3.csv, 'data/restaurants_with_states.csv') 
-                    .defer(d3.csv, 'data/aggregated_health_information_by_state.csv') 
+                    .defer(d3.csv, 'data/restaurant_locations.csv') 
                     .defer(d3.json, 'data/us.json')
+                    .defer(d3.csv, 'data/states.csv')
                     .await(dataLoaded);
 
             }
