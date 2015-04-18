@@ -46,8 +46,8 @@ RestaurantVis = function(_parentElement, _restaurantData, _mapData, _stateData, 
  */
 RestaurantVis.prototype.initVis = function(){
 
-    var that = this; 
-    var franchiseNames = ["Starbucks", "McDonalds", "BurgerKing", "DairyQueen"]; 
+    // make data and functions available in other scopes
+    var that = this;  
 
     // constructs SVG layout
     this.svg = this.parentElement.append("svg")
@@ -60,13 +60,18 @@ RestaurantVis.prototype.initVis = function(){
     this.x = d3.scale.ordinal()
         .rangeRoundBands([0, this.width], .1);
 
-    // create y scales (one for each fast food chain)
-    franchiseNames.forEach(function (d){
-        that[d] = d3.scale.linear()
-            .domain([0, d3.max(that.stateData, function (e){ return e[d];})])
+    // create y scale
+    that.y = d3.scale.linear()
+            .domain([0, d3.max(this.stateData, function (d){
+                var restaurants = ["restaurants_perCapita", "MD_perCapita", "BK_perCapita", "DQ_perCapita", "S_perCapita"];
+                var restaurant_max = d3.max(restaurants, function (e){
+                    return d[e];
+                })
+                return restaurant_max;
+            })])
             .range([this.height, 0]);
-    });
 
+    // create color scale
 	this.color = d3.scale.category20();
 
     // create axis
@@ -75,6 +80,7 @@ RestaurantVis.prototype.initVis = function(){
       .orient("bottom");
 
     this.yAxis = d3.svg.axis()
+        .scale(this.y)
         .orient("left");
 
     // Add axes visual elements
@@ -112,17 +118,24 @@ RestaurantVis.prototype.wrangleData= function(_selection){
         }
     });
 
-    console.log(categories);
-    console.log(_selection);
+
     // update displayData to new values
     categories.forEach(function (d){
-        if (_selection != null){
+        if (_selection === null){
+            // initialize first selection to show Massachussetts 
+            that.displayData[1][d] = that.stateData[22][d];
+            that.displayData[1]["name"] = that.stateData[22]["name"];
+
+            // initialize the second selection to show Texas
+            that.displayData[2][d] = that.stateData[44][d];
+            that.displayData[2]["name"] = that.stateData[44]["name"];
+
+        }else{
             that.displayData[1][d] = _selection[d];
             that.displayData[1]["name"] = _selection.name;
         }
         that.displayData[0][d] = that.stateData[0][d];
     });
-
 }
 
 /**
@@ -135,7 +148,7 @@ RestaurantVis.prototype.updateVis = function(){
     
     // updates scales
     var keys = [];
-    for(var k in this.displayData.us_average) {
+    for(var k in this.displayData[0]) {
         if (k != "name"){keys.push(k);}
     }
     this.x.domain(keys);
@@ -151,12 +164,12 @@ RestaurantVis.prototype.updateVis = function(){
             return "rotate(-65)" 
 	     });
 
-    /*this.svg.select(".y. axis")
-        .call(this.yAxis);*/
-    console.log(this.displayData);
+    this.svg.select(".y.axis")
+        .call(this.yAxis);
+
     // Data join
     var bar = this.svg.selectAll(".bar")
-        .data(this.displayData, function(d) {return d.StarBucks; });
+        .data(this.displayData);
 
  	// Append new bar groups, if required
     var bar_enter = bar.enter().append("g");
@@ -179,7 +192,8 @@ RestaurantVis.prototype.updateVis = function(){
           return that.x(d.name);
         })
         .attr("y", function(d){ 
-        	return that.Starbucks(d.StarBucks);
+            console.log(d.S_perCapita);
+        	return that.y(d.S_perCapita);
         })
         .attr("width", this.x.rangeBand())
         .style("fill", function(d) {
@@ -187,7 +201,7 @@ RestaurantVis.prototype.updateVis = function(){
         })
         .transition()
         .attr("height", function(d) {
-          return that.height - that.StarBucks(d.StarBucks);
+          return that.height - that.y(d.S_perCapita);
         });
 }
 

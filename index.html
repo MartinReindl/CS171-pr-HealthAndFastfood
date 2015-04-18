@@ -35,13 +35,13 @@
         <div class="col-md-1"></div>
         <div class="col-md-2">
              Restaurant Filter:<br>
-            <input type="checkbox" id="Starbucks" value="Starbucks" checked/>
+            <input type="checkbox" id="Starbucks" value="S_perCapita" checked/>
             <label for="Starbucks">Starbucks</label><br>
-            <input type="checkbox" id="McDonalds" value="McDonalds" checked/>
+            <input type="checkbox" id="McDonalds" value="MD_perCapita" checked/>
             <label for="McDonalds">McDonald's</label><br>
-            <input type="checkbox" id="BurgerKing" value="BurgerKing" checked/>
+            <input type="checkbox" id="BurgerKing" value="BK_perCapita" checked/>
             <label for="BurgerKing">Burger King</label><br>
-            <input type="checkbox" id="DairyQueen" value="DairyQueen" checked/>
+            <input type="checkbox" id="DairyQueen" value="DQ_perCapita" checked/>
             <label for="DairyQueen">Dairy Queen</label>
         </div>
         <div class="col-md-7" id="stateVis">
@@ -105,11 +105,24 @@
 
                 if (!error) {
 
+                    // save loaded data
                     restaurantData = _restaurantData;
                     mapData = _mapData; 
-                    stateData = _stateData;
+                    stateData = _stateData; 
 
-
+                    // parse floats and ints from csv string values
+                    stateData.forEach(function (d){
+                        for (var k in d){
+                            
+                            if (k === "restaurants" || k === "BurgerKing" || k === "McDonalds"
+                                || k === "DairyQueen" || k === "Starbucks" || k === "id"){
+                                d[k] = parseInt(d[k]);
+                            }
+                            else if (k !== "name" && k !== "code"){
+                                d[k] = parseFloat(d[k]);
+                            }
+                        }
+                    })
 
                     console.log(restaurantData);
                     console.log(mapData);
