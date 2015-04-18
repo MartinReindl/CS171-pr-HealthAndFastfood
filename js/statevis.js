@@ -29,14 +29,53 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left - this.margin.right,
     this.height = 500 - this.margin.top - this.margin.bottom;
     this.centered;
-	this.health_measure = "obesity"
+	this.health_measure = "mental_health"
 
 	// scales
 	this.color_scale = d3.scale.quantize()
 	this.color_scale.range(colorbrewer.Reds[9])
+	this.xScale = d3.scale.linear()
+	this.xScale.range([this.margin.left, this.width])
+	this.yScale = d3.scale.linear()
+	this.yScale.range([this.height, this.margin.bottom])
+
+	// update x and y scales
+	var xmin = minimum(this.restaurantData, "Longitude")
+	var xmax = maximum(this.restaurantData, "Longitude")
+	var ymin = minimum(this.restaurantData, "Lattitude")
+	var ymax = maximum(this.restaurantData, "Lattitude")
+
+	this.xScale.domain([xmin,xmax])
+	this.yScale.domain([ymin, ymax])
+
 
     this.initVis();
 }
+
+// function that calculates the minimum
+function minimum(a, encoding){
+	var min = Infinity
+	for(el in a){
+		if(a[el][encoding] != null &&
+		  a[el][encoding] < min){
+			min = a[el][encoding];
+	}
+}
+	return min;
+}
+
+// function that calculates the maximum
+function maximum(a, encoding){
+	var max = -Infinity
+	for(el in a){
+		if(a[el][encoding] != null &&
+		  a[el][encoding] > max){
+			max = a[el][encoding];
+		}
+	}
+	return max;
+}
+
 
 
 /**
@@ -44,24 +83,14 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
  */
 StateVis.prototype.initVis = function(){
 
-    // make this available for function calls
+	// make this available for function calls
     var that = this; 
 
     // set up color scale
-	var max = -Infinity
-	for(element in this.stateData){
-		if(this.stateData[element][this.health_measure] > max){
-			max = this.stateData[element][this.health_measure]
-		}
-	}
+	var max = maximum(this.stateData, this.health_measure)
 
-	var min = Infinity
-	for(element in this.stateData){
-		if(this.stateData[element][this.health_measure] < min){
-			min = this.stateData[element][this.health_measure]
-		}
-	}
-
+	var min = minimum(this.stateData, this.health_measure)
+	
 	this.color_scale.domain([min/2, max]) 
 	
 	var projection = d3.geo.albersUsa()
@@ -101,6 +130,27 @@ StateVis.prototype.initVis = function(){
         .attr("id", "state-borders")
         .attr("d", that.path)
         .attr("fill", "blue");
+
+	// create scatterplot of points corresponding to individual restaurants
+	this.node = this.svg.selectAll(".node")
+						.data(that.restaurantData)
+
+	this.node_enter = this.node.enter().append("g");
+
+	this.node_enter.append("circle")
+		.attr("r", 2)
+		/*.attr("x", function(d){
+			return that.xScale(d["Longitude"])
+		})
+		.attr("y", function(d){
+			console.log(that.yScale(d["Lattitude"]))
+			return  that.yScale(d["Lattitude"])
+		})*/
+		//.attr("fill", "black")
+		//.attr("transform", function(d) {
+		//	return "translate("+that.xScale(d["Longitude"])+
+		//		   ","+that.yScale(d["Lattitude"])+")";	
+		//})
 
 
 
