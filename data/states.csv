@@ -1,4 +1,4 @@
-id,code,name,total,BurgerKing,McDonalds,DairyQueen,Starbucks,diabetes,poor_mental_health,Obesity,cardiovascular_disease
+id,code,name,total,BurgerKing,McDonalds,DairyQueen,Starbucks,diabetes,mental_health,obesity,cardiovascular_disease
 0,US,United States,31313,6805,13908,4284,6279,0.1028,0.3374,0.6384,0.0222
 1,AL,Alabama,485,155,244,51,35,0.1383,0.3476,0.6817,0.0287
 2,AK,Alaska,64,15,25,5,19,0.0706,0.3267,0.6606,0.0165
