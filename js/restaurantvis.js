@@ -29,9 +29,7 @@ RestaurantVis = function(_parentElement, _restaurantData, _mapData, _stateData, 
     this.mapData = _mapData;
     this.stateData = _stateData;
     this.eventHandler = _eventHandler;
-    this.displayData = {"us_average": {},
-                        "selection1": {},
-                        "selection2": {}};
+    this.displayData = [];
 
     // constants
     this.margin = {top: 0, right: 0, bottom: 0, left: 0},
@@ -87,6 +85,9 @@ RestaurantVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
 
+    // call the wrangle data method
+    this.wrangleData(null)
+
     // call the update method
     this.updateVis();
 }
@@ -101,9 +102,7 @@ RestaurantVis.prototype.wrangleData= function(_selection){
     var that = this; 
 
     // reset displayData
-    this.displayData = {"us_average": {"name": "United States"},
-                    "selection1": {},
-                    "selection2": {}};
+    this.displayData = [{"name": "United States"}, {}, {}];
 
     // read current category from radiobuttons/checkboxes
     var categories = [];
@@ -113,12 +112,17 @@ RestaurantVis.prototype.wrangleData= function(_selection){
         }
     });
 
+    console.log(categories);
+    console.log(_selection);
     // update displayData to new values
     categories.forEach(function (d){
-        that.displayData.selection1[d] = _selection[d];
-        that.displayData.selection1["name"] = _selection.name;
-        that.displayData.us_average[d] = that.stateData[0][d];
+        if (_selection != null){
+            that.displayData[1][d] = _selection[d];
+            that.displayData[1]["name"] = _selection.name;
+        }
+        that.displayData[0][d] = that.stateData[0][d];
     });
+
 }
 
 /**
@@ -128,10 +132,13 @@ RestaurantVis.prototype.updateVis = function(){
 
     // make data and functions available in other scopes
     var that = this; 
-    console.log(that.displayData);
-    console.log(that.displayData.map(function(d) { return d.StarBucks; }));
+    
     // updates scales
-    this.x.domain();
+    var keys = [];
+    for(var k in this.displayData.us_average) {
+        if (k != "name"){keys.push(k);}
+    }
+    this.x.domain(keys);
 
   	// updates axis
     this.svg.select(".x.axis")
@@ -144,13 +151,13 @@ RestaurantVis.prototype.updateVis = function(){
             return "rotate(-65)" 
 	     });
 
-    /*this.svg.select(".y.axis")
+    /*this.svg.select(".y. axis")
         .call(this.yAxis);*/
-
+    console.log(this.displayData);
     // Data join
     var bar = this.svg.selectAll(".bar")
-        .data(that.displayData, function(d) { return d.StarBucks; });
- 
+        .data(this.displayData, function(d) {return d.StarBucks; });
+
  	// Append new bar groups, if required
     var bar_enter = bar.enter().append("g");
 
@@ -166,12 +173,13 @@ RestaurantVis.prototype.updateVis = function(){
     bar.exit()
         .remove();
 
+    // ensure correct positioning of bars 
     bar.selectAll("rect")
         .attr("x", function(d) {
           return that.x(d.name);
         })
         .attr("y", function(d){ 
-        	return that.y(d.StarBucks);
+        	return that.Starbucks(d.StarBucks);
         })
         .attr("width", this.x.rangeBand())
         .style("fill", function(d) {
@@ -179,7 +187,7 @@ RestaurantVis.prototype.updateVis = function(){
         })
         .transition()
         .attr("height", function(d) {
-          return that.height - that.y(d.StarBucks);
+          return that.height - that.StarBucks(d.StarBucks);
         });
 }
 
