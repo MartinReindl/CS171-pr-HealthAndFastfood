@@ -35,19 +35,21 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
 	this.color_scale = d3.scale.quantize()
 	this.color_scale.range(colorbrewer.Reds[9])
 	this.xScale = d3.scale.linear()
-	this.xScale.range([this.margin.left, this.width])
+	this.xScale.range([135, this.width])
 	this.yScale = d3.scale.linear()
 	this.yScale.range([this.height, this.margin.bottom])
 
 	// update x and y scales
-	var xmin = minimum(this.restaurantData, "Longitude")
-	var xmax = maximum(this.restaurantData, "Longitude")
-	var ymin = minimum(this.restaurantData, "Lattitude")
-	var ymax = maximum(this.restaurantData, "Lattitude")
+	var xmin = minimum(this.restaurantData, "Lattitude")
+	var xmax = maximum(this.restaurantData, "Lattitude")
+	var ymin = minimum(this.restaurantData, "Longitude")
+	var ymax = maximum(this.restaurantData, "Longitude")
+
+	console.log(ymin)
+	console.log(ymax)
 
 	this.xScale.domain([xmin,xmax])
-	this.yScale.domain([ymin, ymax])
-
+	this.yScale.domain([ymin,ymax])
 
     this.initVis();
 }
@@ -56,11 +58,16 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
 function minimum(a, encoding){
 	var min = Infinity
 	for(el in a){
+		if(a[el]["State"] == "AK" ||	
+			a[el]["State"] == "HI"){
+			continue;
+		}
 		if(a[el][encoding] != null &&
-		  a[el][encoding] < min){
-			min = a[el][encoding];
+		  parseFloat(a[el][encoding]) < min){
+			min = parseFloat(a[el][encoding]);
+		}
 	}
-}
+
 	return min;
 }
 
@@ -68,9 +75,13 @@ function minimum(a, encoding){
 function maximum(a, encoding){
 	var max = -Infinity
 	for(el in a){
+		if(a[el]["State"] == "AK" ||
+			a[el]["State"] == "HI"){
+			continue;
+		}
 		if(a[el][encoding] != null &&
-		  a[el][encoding] > max){
-			max = a[el][encoding];
+		  parseFloat(a[el][encoding]) > max){
+			max = parseFloat(a[el][encoding]);
 		}
 	}
 	return max;
@@ -139,13 +150,13 @@ StateVis.prototype.initVis = function(){
 
 	this.node_enter.append("circle")
 		.attr("r", 2)
-		/*.attr("x", function(d){
-			return that.xScale(d["Longitude"])
+		.attr("cx", function(d){
+			return that.xScale(d["Lattitude"])
 		})
-		.attr("y", function(d){
-			console.log(that.yScale(d["Lattitude"]))
-			return  that.yScale(d["Lattitude"])
-		})*/
+		.attr("cy", function(d){
+			//console.log(d["Lattitude"])
+			return  that.yScale(d["Longitude"])
+		})
 		//.attr("fill", "black")
 		//.attr("transform", function(d) {
 		//	return "translate("+that.xScale(d["Longitude"])+
