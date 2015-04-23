@@ -143,19 +143,18 @@ StateVis.prototype.initVis = function(){
         .attr("fill", "blue");
 
 	// create scatterplot of points corresponding to individual restaurants
-	this.node = this.svg.selectAll(".node")
-						.data(that.restaurantData)
-
-	this.node_enter = this.node.enter().append("g");
-
-	this.node_enter.append("circle")
+	this.g.selectAll("circle")
+		.data(that.restaurantData)
+		.enter()
+		.append("circle")
 		.attr("r", 2)
 		.attr("cx", function(d){
-			return that.xScale(d["Lattitude"])
+			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
+			return loc[0];
 		})
 		.attr("cy", function(d){
-			//console.log(d["Lattitude"])
-			return  that.yScale(d["Longitude"])
+			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
+			return loc[1];
 		})
 		//.attr("fill", "black")
 		//.attr("transform", function(d) {
