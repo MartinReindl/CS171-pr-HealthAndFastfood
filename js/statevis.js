@@ -34,10 +34,12 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
 	// scales
 	this.color_scale = d3.scale.quantize()
 	this.color_scale.range(colorbrewer.Reds[9])
+
 	this.xScale = d3.scale.linear()
-	this.xScale.range([135, this.width])
+    .range([135, this.width])
+
 	this.yScale = d3.scale.linear()
-	this.yScale.range([this.height, this.margin.bottom])
+    .range([this.height, this.margin.bottom])
 
 	// update x and y scales
 	var xmin = minimum(this.restaurantData, "Lattitude")
@@ -153,22 +155,6 @@ StateVis.prototype.initVis = function(){
 			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
 			return loc[1];
 		})
-		//.attr("fill", "black")
-		//.attr("transform", function(d) {
-		//	return "translate("+that.xScale(d["Longitude"])+
-		//		   ","+that.yScale(d["Lattitude"])+")";	
-		//})
-
-
-
-    // modify this to append an svg element, not modify the current placeholder SVG element
-    //this.svg = this.parentElement.select("svg");
-
-    // filter, aggregate, modify data
-    //this.wrangleData();
-
-    // call the update method
-    //this.updateVis();
 }
 
 
@@ -191,41 +177,7 @@ StateVis.prototype.wrangleData = function(){
  */
 StateVis.prototype.updateVis = function(){
 
-    // TODO: implement update graphs (D3: update, enter, exit)
-    
-    // updates scales
-    this.x.domain(d3.extent(this.displayData, function(d) {return d.time; }));
-    this.y.domain(d3.extent(this.displayData, function(d) {return d.count; }));
-
-    // updates axis
-    this.svg.select(".x.axis")
-        .call(this.xAxis);
-
-    this.svg.select(".y.axis")
-        .call(this.yAxis)
-
-    // updates graph
-    var path = this.svg.selectAll(".area")
-      .data([this.displayData])
-
-    path.enter()
-      .append("path")
-      .attr("class", "area")
-      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
-    path
-      .transition()
-      .attr("d", this.area);
-
-    path.exit()
-      .remove();
-
-    this.brush.x(this.x);
-    this.svg.select(".brush")
-        .call(this.brush)
-      .selectAll("rect")
-        .attr("height", (this.height));
-
+    // TODO: implement update function (D3: update, enter, exit)
 }
 
 /**

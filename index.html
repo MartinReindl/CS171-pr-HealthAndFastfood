@@ -106,11 +106,13 @@
             var restaurantData = [];
             var mapData = {};
             var stateData = [];
-			var restaurant_filter = "none"
 			var health_measure_selection = "obesity";
             var selection1; 
             var selection2; 
             var selection_switch = true; 
+			var restaurant_filter = ["Starbucks", "BurgerKing", "McDonalds", "DQ"]
+
+
 
             //Create an eventHandler
             var MyEventHandler = new Object();
@@ -123,6 +125,58 @@
                 var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), stateData, MyEventHandler);
                 var health_vis = new HealthVis(d3.select("#healthVis"), stateData, MyEventHandler);
                 var legend_vis = new LegendVis(d3.select("#legendVis"), stateData, MyEventHandler);
+
+				// helper function to see if an array contains a value
+				function contains(array, value){
+					for(var i in array){
+						if(array[i] == value){
+							return i;
+						}
+					}
+					return -1;
+				}
+
+				// helped funtion to pull restaurant name from value
+				function name_from_value(string){
+					if(string == "S_perCapita")
+						return "Starbucks"
+					if(string == "MD_perCapita")
+						return "McDonalds"
+					if(string == "BK_perCapita")
+						return "BurgerKing"
+					if(string == "DQ_perCapita")
+						return "DQ"
+				}
+
+				// helper function to change restaurant filters when checkbox is checked
+				function update_restaurant_filters(){
+					d3.selectAll("input").each(function(d){
+						if(d3.select(this).attr("type") == "checkbox" &&
+						   d3.select(this).node().checked){
+							var restaurant = name_from_value(d3.select(this).attr("value"));
+							if(contains(restaurant_filter, restaurant) >= 0){
+								// do nothing
+							}
+							else{
+								restaurant_filter.push(restaurant)
+							}
+						}
+						else{
+							var restaurant = name_from_value(d3.select(this).attr("value"));
+							var index = contains(restaurant_filter, restaurant)
+							if(index >= 0){
+								restaurant_filter.splice(index, 1)
+							}
+						}
+					})
+				}
+	
+
+				// bind actions to filter buttons
+				d3.selectAll("input").on("change", function(){
+					update_restaurant_filters();
+					statevis.update_vis();
+				})
 
                 $(MyEventHandler).bind("selectionChanged", function(event, _selection){
 
