@@ -45,9 +45,6 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
 	var ymin = minimum(this.restaurantData, "Longitude")
 	var ymax = maximum(this.restaurantData, "Longitude")
 
-	console.log(ymin)
-	console.log(ymax)
-
 	this.xScale.domain([xmin,xmax])
 	this.yScale.domain([ymin,ymax])
 

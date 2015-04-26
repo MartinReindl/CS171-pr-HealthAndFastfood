@@ -22,7 +22,8 @@
     <!-- our vis classes-->
     <script src = "js/statevis.js"></script>
     <script src = "js/restaurantvis.js"></script>
-    <!--<script src = "js/healthvis.js"></script> --> 
+    <script src = "js/healthvis.js"></script>
+    <script src = "js/legendvis.js"></script>
 
     <!--  our stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
@@ -32,41 +33,69 @@
 
     <h1><center>Fast Food and Health in the United States</center></h1>
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-             Restaurant Filter:<br>
-            <input type="checkbox" id="Starbucks" value="S_perCapita" />
-            <label for="Starbucks">Starbucks</label><br>
-            <input type="checkbox" id="McDonalds" value="MD_perCapita" checked/>
-            <label for="McDonalds">McDonald's</label><br>
-            <input type="checkbox" id="BurgerKing" value="BK_perCapita" checked/>
-            <label for="BurgerKing">Burger King</label><br>
-            <input type="checkbox" id="DairyQueen" value="DQ_perCapita" checked/>
-            <label for="DairyQueen">Dairy Queen</label>
-        </div>
-        <div class="col-md-7" id="stateVis">
-        </div>
-        <div class="col-md-2">
-            <form action="">Health Measure to Display:<br>
+        <div class="col-md-3">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <h2>Change Bar Graphs </h2>
+                Select fast food chains to display in bar graph:<br>
+                <input type="checkbox" name="fast_food" class="event"
+                id="Starbucks" value="S_perCapita" checked/>
+                <label for="Starbucks">Starbucks</label>
+                <input type="checkbox" name="fast_food" class="event"
+                id="McDonalds" value="MD_perCapita" checked/>
+                <label for="McDonalds">McDonald's</label>
+                <input type="checkbox" name="fast_food" class="event"
+                id="BurgerKing" value="BK_perCapita" />
+                <label for="BurgerKing">Burger King</label>
+                <input type="checkbox" name="fast_food" class="event"
+                id="DairyQueen" value="DQ_perCapita" checked/>
+                <label for="DairyQueen">Dairy Queen</label>
+                <br>
+                Select health measures to display in bar graph:<br>
+                <input type="checkbox" name="health_measure" class="event"
+                id="Obesity" value="obesity" checked/>
+                <label for="Obesity">Obesity</label>
+                <input type="checkbox" name="health_measure" class="event"
+                id="mental_health" value="mental_health" checked/>
+                <label for="mental_health">Poor Mental Health</label>
+                <input type="checkbox" name="health_measure" class="event"
+                id="Diabetes" value="diabetes" />
+                <label for="Diabetes">Diabetes</label>
+                <input type="checkbox" name="health_measure" class="event"
+                id="cardiovascular_disease" value="cardiovascular_disease" checked/>
+                <label for="cardiovascular_disease">Cardiovascular Disease</label>
+                <br>
+                <h2>Change Map</h2>
                 <input type="radio" name="health_measure" value="obesity" checked> Obesity<br>
                 <input type="radio" name="health_measure" 
                        value="cardiovascular_disease"> Cardiovascular Disease<br>
                 <input type="radio" name="health_measure" value="diabetes"> Diabetes<br>
                 <input type="radio" name="health_measure" value="mental_health"> Mental Health<br>
+            </div>
+        </div>
+        <div class="col-md-7" id="stateVis">
+        </div>
+        <div class="col-md-2">
+            <form action="">Select Map Items:<br>
+
             </form>
         </div>
     </div>
     <div class="row">
-        <div class='col-sm-4' id='restaurantVis'></div>
-        <div class='col-sm-4'></div>
-        <div class='col-sm-4' id='healthVis'></div>
+        <div class='col-sm-5' id='restaurantVis'>
+            <center><h2><b>Fast Food Restaurants</b></h2></center>
+        </div>
+        <div class='col-sm-2' id='legendVis'></div>
+        <div class='col-sm-5' id='healthVis'>
+            <center><h2><b>Fast Food Restaurants</b></h2></center>
+        </div>
     </div>
 
 
 
 
     <script>
-        $(function(){ 
+        $(function(){  // this function is executed when the page is loaded
 
             //==========================================
             //--- HERE IS WHERE ALL THE MAGIC STARTS --
@@ -78,25 +107,49 @@
             var mapData = {};
             var stateData = [];
 			var restaurant_filter = "none"
-			var health_measure_selection = "obesity"
+			var health_measure_selection = "obesity";
+            var selection1; 
+            var selection2; 
+            var selection_switch = true; 
 
+            //Create an eventHandler
+            var MyEventHandler = new Object();
 
             // call this function after Data is loaded, reformatted and bound to the variables
             var initVis = function(){
 
-                //TODO: Create an eventHandler  --> DONE :)
-                var MyEventHandler = new Object();
-
-                //TODO: Instantiate all Vis Objects here
+                //Instantiate all Vis Objects here
                 var state_vis = new StateVis(d3.select("#stateVis"), restaurantData, mapData, stateData, MyEventHandler);
-                var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), restaurantData, mapData, stateData, MyEventHandler);
-                //var health_vis = new HealthVis(d3.select("#healthVis"), restaurantData, healthData, MyEventHandler);
+                var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), stateData, MyEventHandler);
+                var health_vis = new HealthVis(d3.select("#healthVis"), stateData, MyEventHandler);
+                var legend_vis = new LegendVis(d3.select("#legendVis"), stateData, MyEventHandler);
 
                 $(MyEventHandler).bind("selectionChanged", function(event, _selection){
-                    
-                    restaurant_vis.onSelectionChange(_selection);
-                    //health_vis.onSelectionChange(brushRange.startDate, brushRange.endDate);
+
+                    // check if a new selection has been made
+                    if (_selection !== "checkbox"){
+                         // update selection
+                        if (selection_switch === true){
+                            // save new selection
+                            selection1 = _selection;
+                            // flip switch
+                            selection_switch = false; 
+
+                        } else {
+                            // save new selection
+                            selection2 = _selection
+                            // flip switch 
+                            selection_switch = true; 
+                        }
+                    }
+
+                    // create supporting visualizations
+                    restaurant_vis.onSelectionChange(selection1, selection2);
+                    health_vis.onSelectionChange(selection1, selection2);
+                    legend_vis.onSelectionChange(selection1, selection2);
                 });
+
+
 
             }
 
@@ -109,6 +162,10 @@
                     restaurantData = _restaurantData;
                     mapData = _mapData; 
                     stateData = _stateData; 
+
+                    // set initial selections
+                    selection1 = stateData[22];
+                    selection2 = stateData[44];
 
                     // parse floats and ints from csv string values
                     stateData.forEach(function (d){
@@ -139,10 +196,14 @@
                     .defer(d3.json, 'data/us.json')
                     .defer(d3.csv, 'data/states.csv')
                     .await(dataLoaded);
-
             }
-            
+     
             startHere();
+
+            // add event listeners for checkboxes
+            d3.selectAll("input").on("click", function (){
+                $(MyEventHandler).trigger("selectionChanged", "checkbox");
+            });
 
         })
     </script>

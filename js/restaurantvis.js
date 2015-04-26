@@ -3,7 +3,6 @@
  */
 
 
-
 /*
  *
  * ======================================================
@@ -21,20 +20,19 @@
  *                      of restaurants of each franchise
  * @param _eventHandler -- the event handler                     
  */
-RestaurantVis = function(_parentElement, _restaurantData, _mapData, _stateData, _eventHandler){
+RestaurantVis = function(_parentElement, _stateData, _eventHandler){
 
     // data 
     this.parentElement = _parentElement;
-    this.restaurantData = _restaurantData;
-    this.mapData = _mapData;
     this.stateData = _stateData;
     this.eventHandler = _eventHandler;
     this.displayData = [];
 
     // constants
-    this.margin = {top: 0, right: 0, bottom: 40, left: 40},
-    this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left - this.margin.right,
-    this.height = 200 - this.margin.top - this.margin.bottom;
+    this.margin = {top: 20, right: 0, bottom: 30, left: 100},
+    this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
+        - this.margin.right,
+    this.height = 300 - this.margin.top - this.margin.bottom;
     this.centered;
 
     this.initVis();
@@ -85,17 +83,18 @@ RestaurantVis.prototype.initVis = function(){
         .attr("class", "y axis")
 
     // call the wrangle data method
-    this.wrangleData(null)
+    this.wrangleData(this.stateData[22], this.stateData[44])
 
     // call the update method
     this.updateVis();
 }
 
 /**
- * Method to wrangle the data. In this case it takes an options object
- * @param _filterFunction - a function that filters data or "null" if none
+ * Method to wrangle the data. 
+ * @param _selection1 - the first state selected by the user
+ * @param _selection2 - the second state selected by the user
  */
-RestaurantVis.prototype.wrangleData= function(_selection){
+RestaurantVis.prototype.wrangleData= function(_selection1, _selection2){
 
     // make data and functions available in other scopes
     var that = this; 
@@ -107,48 +106,40 @@ RestaurantVis.prototype.wrangleData= function(_selection){
     var categories = [];
     d3.selectAll("input").each(function(){
         if(d3.select(this).node().checked){
-            if (this.type == "checkbox" ) {categories.push(this.value);}
+            if (this.type == "checkbox" && this.name == "fast_food" ){
+                categories.push(this.value);}
         }
     });
 
     // update displayData to new values
     categories.forEach(function (d){
 
-        // object for this category
-        var category = [{},{},{}];
+        // array for this category
+        var category = [];
 
-        // set US averags
-        category[0]["franchise"] = d; 
-        category[0]["name"] = "United States";
-        category[0]["data"] = that.stateData[0][d]; 
+        // add US averages
+        var selection0 = {}; 
+        selection0["franchise"] = d; 
+        selection0["name"] = "United States";
+        selection0["data"] = that.stateData[0][d]; 
+        category.push(selection0); 
 
-        if (_selection === null){
+        // add first selection 
+        var selection1 = {};
+        selection1["franchise"] = d; 
+        selection1["name"] = _selection1.name;
+        selection1["data"] = _selection1[d]
+        category.push(selection1); 
 
-            // initialize first selection to be Massachussetts 
-            category[1]["franchise"] = d; 
-            category[1]["name"] = that.stateData[22]["name"];
-            category[1]["data"] = that.stateData[22][d];
+        // add second selection
+        var selection2 = {};
+        selection2["franchise"] = d; 
+        selection2["name"] = _selection2.name;
+        selection2["data"] = _selection2[d]; 
+        category.push(selection2); 
 
-            // initialize the second selection to be Texas
-            category[2]["franchise"] = d; 
-            category[2]["name"] = that.stateData[44]["name"];
-            category[2]["data"] = that.stateData[44][d];
-
-        }else{
-
-            // set first selection
-            category[1]["franchise"] = d; 
-            category[1]["name"] = _selection.name;
-            category[1]["data"] = _selection[d]
-
-            // initialize the second selection to be Texas
-            category[2]["franchise"] = d; 
-            category[2]["name"] = _selection.name;
-            category[2]["data"] = _selection[d]
-        }
-        
+        // rename objects for better labeling 
         category.forEach(function (d){
-
             switch (d.franchise){
                 case "S_perCapita": d.franchise = "Starbucks"; break;
                 case "MD_perCapita": d.franchise = "McDonalds"; break;
@@ -156,21 +147,20 @@ RestaurantVis.prototype.wrangleData= function(_selection){
                 case "DQ_perCapita": d.franchise = "Dairy Queen"; 
             }
         })
-        console.log(category);
 
-        // move to displayData
-        that.displayData = that.displayData.concat(category);
+        // update displayData
+        that.displayData = that.displayData.concat(category);  
     });
 }
 
 /**
- * the drawing function - should use the D3 selection, enter, exit
+ * the drawing function - uses D3 enter, update, exit to update visualization
  */
 RestaurantVis.prototype.updateVis = function(){
 
     // make data and functions available in other scopes
     var that = this; 
-    
+
     // updates scales
     this.x.domain(this.displayData.map(function(d){return d.franchise;}));
 
@@ -179,65 +169,64 @@ RestaurantVis.prototype.updateVis = function(){
     // creates sub-x scale
     this.x_sub = d3.scale.ordinal()
         .domain(this.displayData.map(function(d){return d.name;}))
-        .rangeRoundBands([0,(this.width/this.displayData.length)], .1);
+        .rangeRoundBands([0, that.width/(that.displayData.length/3)], .2);
 
   	// updates axis
     this.svg.select(".x.axis")
         .call(this.xAxis)	    
         .selectAll("text")  
-
+        .style("font-size","17px")
         .attr("dx", "-.8em")
-        .attr("dy", ".15em");
+        .attr("dy", ".75em");
 
     this.svg.select(".y.axis")
         .call(this.yAxis);
 
     // Data join
     var bar = this.svg.selectAll(".bar")
-        .data(this.displayData);
+        .data(that.displayData);
 
- 	// Append new bar groups, if required
-    var bar_enter = bar.enter().append("g");
+    // Enter
+    bar.enter().append("rect")
 
-    // Append a rect for the Enter set (new g)
-    bar_enter.append("rect");
-
-    // Add attributes (position) to all bars
+    // Update
     bar
-        .attr("class", "bar")
-        .transition();
+        .attr("class","bar");
 
     // Remove the extra bars
     bar.exit()
         .remove();
-        console.log(this.displayData);
+
     // ensure correct positioning of bars 
-    bar.selectAll("rect")
-        .attr("x", function(d) {
-          return that.x(d.franchise) + that.x_sub(d.name) * 3;
+    bar
+        .transition()
+        .attr("x", function(d){
+            return that.x(d.franchise) + that.x_sub(d.name) 
+                - that.x_sub(that.displayData[0]["name"]);
         })
         .attr("y", function(d){ 
         	return that.y(d.data);
         })
         .attr("width", this.x.rangeBand()/3)
         .style("fill", function(d) {
-          return that.color(d.name);
+            return that.color(d.name);
         })
-        .transition()
         .attr("height", function(d) {
-          return that.height - that.y(d.data);
+            return that.height - that.y(d.data);
         });
+
 }
 
 
 /**
- * Gets called by event handler and updates the displayData
- * @param selection is the state selected by the user
+ * Gets called by event handler to wrangle data and update graph with new input
+ * @ param selection1 is the first state selected by the user
+ * @ param selection2 is the second state selected by the user
  */
-RestaurantVis.prototype.onSelectionChange= function (_selection){
+RestaurantVis.prototype.onSelectionChange= function (_selection1, _selection2){
 
     // call wrangle function
-    this.wrangleData(_selection); 
+    this.wrangleData(_selection1, _selection2); 
    
     // update bar graph
     this.updateVis();
