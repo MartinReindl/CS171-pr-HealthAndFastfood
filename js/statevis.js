@@ -98,55 +98,9 @@ StateVis.prototype.initVis = function(){
 		.call(this.zoom)
 		.call(this.zoom.event)
 
-    this.g.append("g")
-            .attr("id", "states")
-        .selectAll("path")
-            .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
-            .enter().append("path")
-            .attr("d", that.path)
-			.attr("fill", function(d) {
-				var id = d["id"];
-				for(element in that.stateData){
-					if(id == that.stateData[element]["id"]){
-						return that.color_scale(that.stateData[element][that.health_measure])
-					}
-				}
-				return "black"
-			})
-			.attr("class", "states")
-            .on("dblclick", function (d) {that.doubleClicked (d)})
-            .on("click", function (d) {that.clicked (d)});
-
-    this.g.append("path")
-        .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
-        .attr("id", "state-borders")
-        .attr("d", that.path)
-        .attr("fill", "blue");
-=======
-  this.path = d3.geo.path()
-    .projection(projection);
-
-	// - construct SVG layout
-  this.svg = this.parentElement.append("svg")
-    .attr("width", this.width + this.margin.left + this.margin.right)
-    .attr("height", this.height + this.margin.top + this.margin.bottom);
-
-  // tooltip
-  tip = d3.tip()
-    .attr("class", "d3-tip")
-    .direction("s")
-    .html(function (d) { 
-      return that.display_tip(d);
-    });
-
-  // initialize tooltip
-  this.svg.call(tip)
-
-  this.g = this.svg.append("g");
-  
-  this.g.append("g")
+  	this.g.append("g")
     .attr("id", "states")
-  .selectAll("path")
+	.selectAll("path")
     .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
     .enter().append("path")
     .attr("d", that.path)
@@ -166,14 +120,25 @@ StateVis.prototype.initVis = function(){
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide);
 
-  this.g.append("path")
-      .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
-      .attr("id", "state-borders")
-      .attr("d", that.path)
-      .attr("fill", "blue");
->>>>>>> df2236324ec7fd89036a421ef0b058d265f1eba9
 
-	// create scatterplot of points corresponding to individual restaurants
+    this.g.append("path")
+        .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
+        .attr("id", "state-borders")
+        .attr("d", that.path)
+        .attr("fill", "blue");
+  
+  // tooltip
+  tip = d3.tip()
+    .attr("class", "d3-tip")
+    .direction("s")
+    .html(function (d) { 
+      return that.display_tip(d);
+    });
+
+  // initialize tooltip
+  this.svg.call(tip)
+	
+  // create scatterplot of points corresponding to individual restaurants
 	this.g.selectAll("circle")
 		.data(that.restaurantData)
 		.enter()
@@ -207,17 +172,7 @@ StateVis.prototype.initVis = function(){
 StateVis.prototype.wrangleData = function(){
 	// do nothing
 }
-<<<<<<< HEAD
-/*
-StateVis.prototype.zoomed = function(g){
-	g.style("stroke-width", 1.5/d3.event.scale +"px");
-	g.attr("transform", "translate("+d3.event.translate+")scale("+d3.event.scale+")");
-}
-*/
-=======
 
-
->>>>>>> df2236324ec7fd89036a421ef0b058d265f1eba9
 /**
  * the drawing function - should use the D3 selection, enter, exit
  * @param _options -- only needed if different kinds of updates are needed
@@ -327,17 +282,7 @@ StateVis.prototype.doubleClicked = function (d){
  * @ parameter selection is the selected state
  */ 
 StateVis.prototype.clicked = function (selection){
-<<<<<<< HEAD
-
-    // find information on selection
-    var selectionInfo; 
-    this.stateData.forEach(function (e) {
-        if (selection.id == e.id) {
-            selectionInfo = e; 
-        }
-    });
-=======
-  
+ 
   // find information on selection
   var selectionInfo; 
   this.stateData.forEach(function (e) {
@@ -349,7 +294,6 @@ StateVis.prototype.clicked = function (selection){
   // trigger event handler
   $(this.eventHandler).trigger("selectionChanged", selectionInfo);
 }
->>>>>>> df2236324ec7fd89036a421ef0b058d265f1eba9
 
 /*
  * display_tip shows information about the state we are currently hovering on 
