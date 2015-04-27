@@ -102,21 +102,35 @@ StateVis.prototype.initVis = function(){
 	var min = minimum(this.stateData, this.health_measure)
 	
 	this.color_scale.domain([min/2, max]) 
-	
+
 	projection = d3.geo.albersUsa()
         .scale(1070)
         .translate([this.width / 2, this.height / 2]);
 
-    this.path = d3.geo.path()
+	this.path = d3.geo.path()
         .projection(projection);
 
 	// - construct SVG layout
     this.svg = this.parentElement.append("svg")
         .attr("width", this.width + this.margin.left + this.margin.right)
         .attr("height", this.height + this.margin.top + this.margin.bottom);
+	
+	this.g = this.svg.append("g");
+	
+	// set up zoom
+	this.zoom = d3.behavior.zoom()
+		.translate([0,0])
+		.scale(1)
+		.scaleExtent([1,8])
+		.on("zoom", function(){
+			that.g.style("stroke-width", 1.5/d3.event.scale +"px");
+			that.g.attr("transform", "translate("+d3.event.translate+")scale("+d3.event.scale+")");
+		});
+	
+	this.svg
+		.call(this.zoom)
+		.call(this.zoom.event)
 
-    this.g = this.svg.append("g");
-    
     this.g.append("g")
             .attr("id", "states")
         .selectAll("path")
@@ -178,9 +192,12 @@ StateVis.prototype.wrangleData = function(){
 	// do nothing
 	
 }
-
-
-
+/*
+StateVis.prototype.zoomed = function(g){
+	g.style("stroke-width", 1.5/d3.event.scale +"px");
+	g.attr("transform", "translate("+d3.event.translate+")scale("+d3.event.scale+")");
+}
+*/
 /**
  * the drawing function - should use the D3 selection, enter, exit
  * @param _options -- only needed if different kinds of updates are needed
@@ -292,7 +309,7 @@ StateVis.prototype.doubleClicked = function (d){
  */ 
 
 StateVis.prototype.clicked = function (selection){
-    
+
     // find information on selection
     var selectionInfo; 
     this.stateData.forEach(function (e) {
