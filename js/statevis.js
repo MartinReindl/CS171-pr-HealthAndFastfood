@@ -68,13 +68,14 @@ StateVis.prototype.initVis = function(){
 	var min = minimum(this.stateData, this.health_measure)
 	
 	this.color_scale.domain([min/2, max]) 
-	
+
 	projection = d3.geo.albersUsa()
     .scale(1070)
     .translate([this.width / 2, this.height / 2]);
 
-  this.path = d3.geo.path()
-    .projection(projection);
+
+	this.path = d3.geo.path()
+        .projection(projection);
 
 	// - construct SVG layout
   this.svg = this.parentElement.append("svg")
@@ -92,11 +93,25 @@ StateVis.prototype.initVis = function(){
   // initialize tooltip
   this.svg.call(tip)
 
-  this.g = this.svg.append("g");
-  
+	this.g = this.svg.append("g");
+	
+	// set up zoom
+	this.zoom = d3.behavior.zoom()
+		.translate([0,0])
+		.scale(1)
+		.scaleExtent([1,8])
+		.on("zoom", function(){
+			that.g.style("stroke-width", 1.5/d3.event.scale +"px");
+			that.g.attr("transform", "translate("+d3.event.translate+")scale("+d3.event.scale+")");
+		});
+	
+	this.svg
+		.call(this.zoom)
+		.call(this.zoom.event)
+
   this.g.append("g")
     .attr("id", "states")
-  .selectAll("path")
+	.selectAll("path")
     .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
     .enter().append("path")
     .attr("d", that.path)
@@ -116,13 +131,14 @@ StateVis.prototype.initVis = function(){
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide);
 
-  this.g.append("path")
-      .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
-      .attr("id", "state-borders")
-      .attr("d", that.path)
-      .attr("fill", "blue");
 
-	// create scatterplot of points corresponding to individual restaurants
+    this.g.append("path")
+        .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
+        .attr("id", "state-borders")
+        .attr("d", that.path)
+        .attr("fill", "blue");
+	
+  // create scatterplot of points corresponding to individual restaurants
 	this.g.selectAll("circle")
 		.data(that.restaurantData)
 		.enter()
@@ -156,7 +172,6 @@ StateVis.prototype.initVis = function(){
 StateVis.prototype.wrangleData = function(){
 	// do nothing
 }
-
 
 /**
  * the drawing function - should use the D3 selection, enter, exit
@@ -267,7 +282,7 @@ StateVis.prototype.doubleClicked = function (d){
  * @ parameter selection is the selected state
  */ 
 StateVis.prototype.clicked = function (selection){
-  
+ 
   // find information on selection
   var selectionInfo; 
   this.stateData.forEach(function (e) {
