@@ -82,7 +82,7 @@ StateVis.prototype.initVis = function(){
     .attr("height", this.height + this.margin.top + this.margin.bottom);
 
   // tooltip
-  tip = d3.tip()
+  var tip = d3.tip()
     .attr("class", "d3-tip")
     .direction("s")
     .html(function (d) { 
