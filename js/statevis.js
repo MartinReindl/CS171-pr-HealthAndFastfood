@@ -54,9 +54,6 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
 }
 
 
-
-
-
 /**
  * Method that sets up the SVG and the variables
  */
@@ -207,6 +204,9 @@ StateVis.prototype.updateVis = function(filtered_restaurant_data, health_measure
 	points.enter()
 		.append("circle")
 		.attr("r", 1.2)
+		
+		
+	points
 		.attr("cx", function(d){
 			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
 			return loc[0];
