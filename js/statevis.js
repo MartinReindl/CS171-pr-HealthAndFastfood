@@ -77,10 +77,21 @@ StateVis.prototype.initVis = function(){
         .projection(projection);
 
 	// - construct SVG layout
-    this.svg = this.parentElement.append("svg")
-        .attr("width", this.width + this.margin.left + this.margin.right)
-        .attr("height", this.height + this.margin.top + this.margin.bottom);
-	
+  this.svg = this.parentElement.append("svg")
+    .attr("width", this.width + this.margin.left + this.margin.right)
+    .attr("height", this.height + this.margin.top + this.margin.bottom);
+
+  // tooltip
+  var tip = d3.tip()
+    .attr("class", "d3-tip")
+    .direction("s")
+    .html(function (d) { 
+      return that.display_tip(d);
+    });
+
+  // initialize tooltip
+  this.svg.call(tip)
+
 	this.g = this.svg.append("g");
 	
 	// set up zoom
@@ -97,38 +108,27 @@ StateVis.prototype.initVis = function(){
 		.call(this.zoom)
 		.call(this.zoom.event)
 
-  // tooltip
-  var tip = d3.tip()
-    .attr("class", "d3-tip")
-    .direction("s")
-    .html(function (d) { 
-      return that.display_tip(d);
-    });
-
-  // initialize tooltip
-  this.svg.call(tip)
-	
 	this.g.append("g")
-    .attr("id", "states")
-	.selectAll("path")
-    .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
-    .enter().append("path")
-    .attr("d", that.path)
-		.attr("fill", function(d) {
-      var id = d["id"];
-      for(element in that.stateData){
-        if(id == that.stateData[element]["id"]){
-          return that.color_scale(that.stateData[element][that.health_measure])
-        }
-      }
-			return "black"
-		})
-    .attr("class", "states")
-    .on("dblclick", function (d) {that.doubleClicked (d)})
-    .on("click", function (d) {that.clicked (d)})
-    // Show and hide tip on mouse events
-    .on('mouseover', tip.show)
-    .on('mouseout', tip.hide);
+    	.attr("id", "states")
+		.selectAll("path")
+		.data(topojson.feature(that.mapData, that.mapData.objects.states).features)
+		.enter().append("path")
+		.attr("d", that.path)
+			.attr("fill", function(d) {
+		  var id = d["id"];
+		  for(element in that.stateData){
+			if(id == that.stateData[element]["id"]){
+			  return that.color_scale(that.stateData[element][that.health_measure])
+			}
+		  }
+				return "black"
+			})
+		.attr("class", "states")
+		.on("dblclick", function (d) {that.doubleClicked (d)})
+		.on("click", function (d) {that.clicked (d)})
+		// Show and hide tip on mouse events
+		.on('mouseover', tip.show)
+		.on('mouseout', tip.hide);
 
 
     this.g.append("path")
