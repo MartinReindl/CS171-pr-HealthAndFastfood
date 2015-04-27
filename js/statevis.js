@@ -132,6 +132,7 @@ StateVis.prototype.initVis = function(){
 				}
 				return "black"
 			})
+			.attr("class", "states")
             .on("dblclick", function (d) {that.doubleClicked (d)})
             .on("click", function (d) {that.clicked (d)});
 
@@ -223,6 +224,9 @@ StateVis.prototype.updateVis = function(filtered_restaurant_data, health_measure
 	points.enter()
 		.append("circle")
 		.attr("r", 1.2)
+		
+		
+	points
 		.attr("cx", function(d){
 			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
 			return loc[0];
