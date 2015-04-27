@@ -26,8 +26,6 @@
     <script src = "js/healthvis.js"></script>
     <script src = "js/legendvis.js"></script>
 
-
-
 </head>
 <body>
 
@@ -53,11 +51,11 @@
                 <br>
                 Select health measure to Visualize with Heat Map:
 				<br>
-				<input type="radio" name="health_measure" value="obesity" checked> Obesity<br>
+				<input type="radio" name="health_measure" value="Obesity" checked> Obesity<br>
                 <input type="radio" name="health_measure" 
-                       value="cardiovascular_disease"> Cardiovascular Disease<br>
-                <input type="radio" name="health_measure" value="diabetes"> Diabetes<br>
-                <input type="radio" name="health_measure" value="mental_health"> Mental Health<br>
+                       value="Cardiovascular Disease"> Cardiovascular Disease<br>
+                <input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
+                <input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
 				<h2>Change Bar Graphs </h2>
                 Select fast food chains to display in bar graph:<br>
                 <input type="checkbox" name="fast_food" class="event"
@@ -75,16 +73,16 @@
                 <br>
                 Select health measures to display in bar graph:<br>
                 <input type="checkbox" name="health_measure" class="event"
-                id="Obesity" value="obesity" checked/>
+                id="Obesity" value="Obesity" checked/>
                 <label for="Obesity">Obesity</label>
                 <input type="checkbox" name="health_measure" class="event"
-                id="mental_health" value="mental_health" checked/>
+                id="mental_health" value="Mental Health" checked/>
                 <label for="mental_health">Poor Mental Health</label>
                 <input type="checkbox" name="health_measure" class="event"
-                id="Diabetes" value="diabetes" />
+                id="Diabetes" value="Diabetes" />
                 <label for="Diabetes">Diabetes</label>
                 <input type="checkbox" name="health_measure" class="event"
-                id="cardiovascular_disease" value="cardiovascular_disease" checked/>
+                id="cardiovascular_disease" value="Cardiovascular Disease" checked/>
                 <label for="cardiovascular_disease">Cardiovascular Disease</label>
                 <br>
             </div>
@@ -122,7 +120,7 @@
             var restaurantData = [];
             var mapData = {};
             var stateData = [];
-			var health_measure_selection = "obesity";
+			var health_measure_selection = "Obesity";
             var selection1; 
             var selection2; 
             var selection_switch = true; 
@@ -176,7 +174,6 @@
 							}
 						}
 					})
-					console.log(restaurant_filter)
 				}
 	
 				function update_health_encoding(){
@@ -268,8 +265,8 @@
                     })
 
                     console.log(restaurantData);
-                    //console.log(mapData);
-                    //console.log(stateData);
+                    console.log(mapData);
+                    console.log(stateData);
 
                     initVis();
                 }
