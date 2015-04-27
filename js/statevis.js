@@ -29,11 +29,11 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left - this.margin.right,
     this.height = 500 - this.margin.top - this.margin.bottom;
     this.centered;
-	this.health_measure = "mental_health"
+	this.health_measure = "obesity"
 
 	// scales
 	this.color_scale = d3.scale.quantize()
-	this.color_scale.range(colorbrewer.Reds[9])
+	this.color_scale.range(colorbrewer.PuBu[9])
 
 	this.xScale = d3.scale.linear()
     .range([135, this.width])
@@ -103,7 +103,7 @@ StateVis.prototype.initVis = function(){
 	
 	this.color_scale.domain([min/2, max]) 
 	
-	var projection = d3.geo.albersUsa()
+	projection = d3.geo.albersUsa()
         .scale(1070)
         .translate([this.width / 2, this.height / 2]);
 
@@ -146,7 +146,7 @@ StateVis.prototype.initVis = function(){
 		.data(that.restaurantData)
 		.enter()
 		.append("circle")
-		.attr("r", 2)
+		.attr("r", 1.2)
 		.attr("cx", function(d){
 			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
 			return loc[0];
@@ -155,18 +155,27 @@ StateVis.prototype.initVis = function(){
 			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
 			return loc[1];
 		})
+		.attr("fill", function(d){
+			if(d["Restaurant"] == "BurgerKing")
+				return "white"
+			if(d["Restaurant"] == "McDonalds")
+				return "yellow"
+			if(d["Restaurant"] == "Starbucks")
+				return "green"
+			if(d["Restaurant"] == "DQ")
+				return "red"
+		})
 }
 
 
 
 /**
  * Method to wrangle the data. In this case it takes an options object
-  */
+**/
 StateVis.prototype.wrangleData = function(){
 
-    // displayData should hold the data which is visualized
-    this.displayData = this.data;
-
+	// do nothing
+	
 }
 
 
@@ -175,33 +184,67 @@ StateVis.prototype.wrangleData = function(){
  * the drawing function - should use the D3 selection, enter, exit
  * @param _options -- only needed if different kinds of updates are needed
  */
-StateVis.prototype.updateVis = function(){
+StateVis.prototype.updateVis = function(filtered_restaurant_data, health_measure_encoding){
+	
+	// update health measure
+	this.health_measure = health_measure_encoding
 
-    // TODO: implement update function (D3: update, enter, exit)
+	// make this available for function calls
+    var that = this; 
+
+    // update color scale
+	var max = maximum(this.stateData, this.health_measure)
+
+	var min = minimum(this.stateData, this.health_measure)
+	
+	this.color_scale.domain([min/2, max]) 
+
+	// redefine projection
+	projection = d3.geo.albersUsa()
+        .scale(1070)
+        .translate([this.width / 2, this.height / 2]);
+
+	// update heat map
+	d3.selectAll("path").attr("fill", function(d){
+		var id = d["id"];
+		for(element in that.stateData){
+			if(id == that.stateData[element]["id"]){
+				return that.color_scale(that.stateData[element][that.health_measure])
+			}
+		}
+		return "black"
+	})
+
+	// data join
+	var points = this.g.selectAll("circle")
+		.data(filtered_restaurant_data)
+
+	// add points if necessary
+	points.enter()
+		.append("circle")
+		.attr("r", 1.2)
+		.attr("cx", function(d){
+			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
+			return loc[0];
+		})
+		.attr("cy", function(d){
+			var loc = projection([parseFloat(d["Lattitude"]), parseFloat(d["Longitude"])])
+			return loc[1];
+		})
+		.attr("fill", function(d){
+			if(d["Restaurant"] == "BurgerKing")
+				return "white"
+			if(d["Restaurant"] == "McDonalds")
+				return "yellow"
+			if(d["Restaurant"] == "Starbucks")
+				return "green"
+			if(d["Restaurant"] == "DQ")
+				return "red"
+		})
+
+	// remove points that aren't needed anymore
+	points.exit().remove()
 }
-
-/**
- * Gets called by event handler and should create new aggregated data
- * aggregation is done by the function "aggregate(filter)". Filter has to
- * be defined here.
- * @param selection
- */
-StateVis.prototype.onSelectionChange= function (selectionStart, selectionEnd){
-
-    // TODO: call wrangle function
-    this.wrangleData();
-    // do nothing -- no update when brushing
-
-}
-
-
-/*
- *
- * ==================================
- * From here on only HELPER functions
- * ==================================
- *
- * */
 
 /*
  * doubleClicked allows a user to zoom in onto the map 
