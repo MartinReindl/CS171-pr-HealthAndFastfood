@@ -73,7 +73,6 @@ StateVis.prototype.initVis = function(){
     .scale(1070)
     .translate([this.width / 2, this.height / 2]);
 
-<<<<<<< HEAD
 	this.path = d3.geo.path()
         .projection(projection);
 
@@ -98,7 +97,18 @@ StateVis.prototype.initVis = function(){
 		.call(this.zoom)
 		.call(this.zoom.event)
 
-  	this.g.append("g")
+  // tooltip
+  var tip = d3.tip()
+    .attr("class", "d3-tip")
+    .direction("s")
+    .html(function (d) { 
+      return that.display_tip(d);
+    });
+
+  // initialize tooltip
+  this.svg.call(tip)
+	
+	this.g.append("g")
     .attr("id", "states")
 	.selectAll("path")
     .data(topojson.feature(that.mapData, that.mapData.objects.states).features)
@@ -127,17 +137,6 @@ StateVis.prototype.initVis = function(){
         .attr("d", that.path)
         .attr("fill", "blue");
   
-  // tooltip
-  tip = d3.tip()
-    .attr("class", "d3-tip")
-    .direction("s")
-    .html(function (d) { 
-      return that.display_tip(d);
-    });
-
-  // initialize tooltip
-  this.svg.call(tip)
-	
   // create scatterplot of points corresponding to individual restaurants
 	this.g.selectAll("circle")
 		.data(that.restaurantData)
