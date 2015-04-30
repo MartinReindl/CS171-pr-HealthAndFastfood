@@ -1,4 +1,4 @@
-/**
+/*
  * structure adapted from CS 171 Homework 3, Spring 2015
  */
 
