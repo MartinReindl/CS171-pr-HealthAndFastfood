@@ -29,10 +29,10 @@ HealthVis = function(_parentElement, _stateData, _eventHandler){
   this.displayData = [];
 
   // constants
-  this.margin = {top: 20, right: 0, bottom: 30, left: 50},
+  this.margin = {top: 0, right: 0, bottom: 30, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
     - this.margin.right,
-  this.height = 300 - this.margin.top - this.margin.bottom;
+  this.height = 250 - this.margin.top - this.margin.bottom;
   this.centered;
 
   this.initVis();
@@ -104,12 +104,14 @@ HealthVis.prototype.wrangleData= function(_selection1, _selection2){
 
   // read current category from radiobuttons/checkboxes
   var categories = [];
-  d3.selectAll("input").each(function(){
+  /*d3.selectAll("input").each(function(){
       if(d3.select(this).node().checked){
           if (this.type == "checkbox" && this.name == "health_measure" ){
               categories.push(this.value);}
       }
   });
+*/
+	categories = ["Obesity", "Diabetes", "Cardiovascular Disease", "Mental Health"]
 
   // update displayData to new values
   categories.forEach(function (d){
@@ -174,7 +176,7 @@ HealthVis.prototype.updateVis = function(){
   this.svg.select(".x.axis")
     .call(this.xAxis)       
     .selectAll("text")  
-    .style("font-size","17px")
+    .style("font-size","8px")
     .attr("dx", "-.8em")
     .attr("dy", ".75em");
 
@@ -206,7 +208,7 @@ HealthVis.prototype.updateVis = function(){
     .attr("y", function(d){ 
         return that.y(d.data);
     })
-    .attr("width", this.x.rangeBand()/3)
+    .attr("width", this.x.rangeBand()/4)
     .style("fill", function(d) {
         return that.color(d.name);
     })

@@ -29,10 +29,10 @@ RestaurantVis = function(_parentElement, _stateData, _eventHandler){
     this.displayData = [];
 
     // constants
-    this.margin = {top: 20, right: 0, bottom: 30, left: 100},
+    this.margin = {top: 20, right: 0, bottom: 30, left: 0},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
         - this.margin.right,
-    this.height = 300 - this.margin.top - this.margin.bottom;
+    this.height = 250 - this.margin.top - this.margin.bottom;
     this.centered;
 
     this.initVis();
@@ -169,7 +169,7 @@ RestaurantVis.prototype.updateVis = function(){
     this.svg.select(".x.axis")
         .call(this.xAxis)	    
         .selectAll("text")  
-        .style("font-size","17px")
+        .style("font-size","10px")
         .attr("dx", "-.8em")
         .attr("dy", ".75em");
 
@@ -201,7 +201,7 @@ RestaurantVis.prototype.updateVis = function(){
         .attr("y", function(d){ 
         	return that.y(d.data);
         })
-        .attr("width", this.x.rangeBand()/3)
+        .attr("width", this.x.rangeBand()/4)
         .style("fill", function(d) {
             return that.color(d.name);
         })

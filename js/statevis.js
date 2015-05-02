@@ -27,7 +27,7 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
   // constants
   this.margin = {top: 0, right: 0, bottom: 0, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left - this.margin.right,
-  this.height = 500 - this.margin.top - this.margin.bottom;
+  this.height = 400 - this.margin.top - this.margin.bottom;
   this.centered;
 	this.health_measure = "Obesity"
 
@@ -70,7 +70,7 @@ StateVis.prototype.initVis = function(){
 	this.color_scale.domain([min/2, max]) 
 
 	projection = d3.geo.albersUsa()
-    .scale(1070)
+    .scale(750)
     .translate([this.width / 2, this.height / 2]);
 
 	this.path = d3.geo.path()
@@ -197,7 +197,7 @@ StateVis.prototype.updateVis = function(filtered_restaurant_data, health_measure
 
 	// redefine projection
 	projection = d3.geo.albersUsa()
-    .scale(1070)
+    .scale(750)
     .translate([this.width / 2, this.height / 2]);
 
 	// update heat map

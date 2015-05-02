@@ -31,7 +31,7 @@ ScatterVis = function(_parentElement, _stateData, _eventHandler, _restaurantFilt
 	this.health_measure_selection = _health_measure_selection;
 
     // constants
-    this.margin = {top: 20, right: 0, bottom: 30, left: 100},
+    this.margin = {top: 0, right: 100, bottom: 30, left: 0},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
         - this.margin.right,
     this.height = 300 - this.margin.top - this.margin.bottom;
@@ -58,10 +58,10 @@ ScatterVis.prototype.initVis = function(){
    
     // creates x scale
     this.x = d3.scale.linear()
-			.range([0, this.width])
+			.range([5, this.width-5])
     // create y scale
     that.y = d3.scale.linear()
-            .range([this.height, 0]);
+            .range([this.height-5, 5]);
 
     // create color scale
 	//this.color = d3.scale.category20();
@@ -89,19 +89,7 @@ ScatterVis.prototype.initVis = function(){
     // call the update method
     this.updateVis();
 }
-/*
-// function that extracts the string to access perCapita information
-function perCapita(string){
-	if(string == "McDonalds")
-		return "MD_perCapita"
-	if(string == "BurgerKing")
-		return "BK_perCapita"
-	if(string == "DQ")
-		return "DQ_perCapita"
-	if(string == "Starbucks")
-		return "S_perCapita"
-}
-*/
+
 // helper function to see if an array contains a value
 function contains(array, value){
 	for(var i in array){
