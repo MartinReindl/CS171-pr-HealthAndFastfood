@@ -23,6 +23,7 @@
     <script src = "js/restaurantvis.js"></script>
     <script src = "js/healthvis.js"></script>
     <script src = "js/legendvis.js"></script>
+    <script src = "js/scattervis.js"></script>
 
 </head>
 <body>
@@ -34,27 +35,27 @@
             <div class="col-md-10">
                 <h2>Change Map</h2>
 				Select fast food chains to display on map:<br>
-                <input type="checkbox" name="fast_food_scatter" class="event"
-                id="Starbucks_scatter" value="Starbucks" checked/>
+                <input type="checkbox" name="fast_food_map" class="event"
+                id="Starbucks_map" value="Starbucks" checked/>
                 <label for="Starbucks">Starbucks</label>
-                <input type="checkbox" name="fast_food_scatter" class="event"
-                id="McDonalds_scatter" value="McDonalds" checked/>
+                <input type="checkbox" name="fast_food_map" class="event"
+                id="McDonalds_map" value="McDonalds" checked/>
                 <label for="McDonalds">McDonald's</label>
                 <br>
-				<input type="checkbox" name="fast_food_scatter" class="event"
-                id="BurgerKing_scatter" value="BurgerKing" checked/>
+				<input type="checkbox" name="fast_food_map" class="event"
+                id="BurgerKing_map" value="BurgerKing" checked/>
                 <label for="BurgerKing">Burger King</label>
-                <input type="checkbox" name="fast_food_scatter" class="event"
-                id="DairyQueen_scatter" value="DQ" checked/>
+                <input type="checkbox" name="fast_food_map" class="event"
+                id="DairyQueen_map" value="DQ" checked/>
                 <label for="DairyQueen">Dairy Queen</label>
                 <br>
                 Select health measure to Visualize with Heat Map:
 				<br>
-				<input type="radio" name="health_measure" value="Obesity" checked> Overweightness<br>
-                <input type="radio" name="health_measure" 
+				<input type="radio" name="health_measure_map" value="Obesity" checked> Overweightness<br>
+                <input type="radio" name="health_measure_map" 
                        value="Cardiovascular Disease"> Cardiovascular Disease<br>
-                <input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
-                <input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
+                <input type="radio" name="health_measure_map" value="Diabetes"> Diabetes<br>
+                <input type="radio" name="health_measure_map" value="Mental Health"> Mental Health<br>
 				<h2>Change Bar Graphs </h2>
                 Select fast food chains to display in bar graph:<br>
                 <input type="checkbox" name="fast_food" class="event"
@@ -105,6 +106,34 @@
             <center><h2><b>Health Measures</b></h2></center>
         </div>
     </div>
+	<div class='row'>
+		<h2>Change ScatterPlot</h2>
+		Select Fast Food Chains to Display on Scatterplot:<br>
+		<input type="checkbox" name="fast_food_scatter" class="event"
+		id="Starbucks_scatter" value="Starbucks" checked/>
+		<label for="Starbucks">Starbucks</label>
+		<input type="checkbox" name="fast_food_scatter" class="event"
+		id="McDonalds_scatter" value="McDonalds" checked/>
+		<label for="McDonalds">McDonald's</label>
+		<br>
+		<input type="checkbox" name="fast_food_scatter" class="event"
+		id="BurgerKing_scatter" value="BurgerKing" checked/>
+		<label for="BurgerKing">Burger King</label>
+		<input type="checkbox" name="fast_food_scatter" class="event"
+		id="DairyQueen_scatter" value="DQ" checked/>
+		<label for="DairyQueen">Dairy Queen</label>
+		<br>
+		Select Health Measure to Display on Scatterplot:
+		<br>
+		<input type="radio" name="health_measure_scatter" value="Obesity" checked> Overweightness<br>
+		<input type="radio" name="health_measure_scatter" 
+			   value="Cardiovascular Disease"> Cardiovascular Disease<br>
+		<input type="radio" name="health_measure_scatter" value="Diabetes"> Diabetes<br>
+		<input type="radio" name="health_measure_scatter" value="Mental Health"> Mental Health<br>
+		
+		<div class="col-md-6" id="scatterVis">
+        </div>
+	</div>
 
 
 
@@ -122,11 +151,14 @@
             var mapData = {};
             var stateData = [];
 			var health_measure_selection = "Obesity";
+			var health_measure_scatter = "Obesity";
             var selection1; 
             var selection2; 
             var selection_switch = true; 
 			var restaurant_filter = ["Starbucks", "BurgerKing", "McDonalds", "DQ"]
+			var restaurant_filter_scatter = ["Starbucks", "BurgerKing", "McDonalds", "DQ"]
 			var filtered_restaurantData = restaurantData;
+			var filtered_stateData = stateData;
 
 
             //Create an eventHandler
@@ -140,6 +172,7 @@
                 var restaurant_vis = new RestaurantVis(d3.select("#restaurantVis"), stateData, MyEventHandler);
                 var health_vis = new HealthVis(d3.select("#healthVis"), stateData, MyEventHandler);
                 var legend_vis = new LegendVis(d3.select("#legendVis"), stateData, MyEventHandler);
+				var scatter_vis = new ScatterVis(d3.select("#scatterVis"), stateData, MyEventHandler, restaurant_filter_scatter, health_measure_scatter);
 
 				// helper function to see if an array contains a value
 				function contains(array, value){
@@ -152,10 +185,10 @@
 				}
 
 				// helper function to change restaurant filters when checkbox is checked
-				function update_restaurant_filters(){
+				function update_restaurant_filters_map(){
 					d3.selectAll("input").each(function(d){
 						if(d3.select(this).attr("type") == "checkbox" &&
-						   d3.select(this).attr("name") == "fast_food_scatter" &&
+						   d3.select(this).attr("name") == "fast_food_map" &&
 						   d3.select(this).node().checked){
 							var restaurant = d3.select(this).attr("value");
 							if(contains(restaurant_filter, restaurant) >= 0){
@@ -166,7 +199,7 @@
 							}
 						}
 						else{
-							if(d3.select(this).attr("name") == "fast_food_scatter"){
+							if(d3.select(this).attr("name") == "fast_food_map"){
 								var restaurant = d3.select(this).attr("value");
 								var index = contains(restaurant_filter, restaurant)
 								if(index >= 0){
@@ -177,14 +210,53 @@
 					})
 				}
 	
-				function update_health_encoding(){
+				function update_health_encoding_map(){
 					d3.selectAll("input").each(function(d){
 						if(d3.select(this).attr("type") == "radio" &&
+							d3.select(this).attr("name") == "health_measure_map" &&
 							d3.select(this).node().checked){
 							health_measure_selection = d3.select(this).attr("value");
 						}
 					})
 				}
+
+				// helper function to change restaurant filters when checkbox is checked
+				function update_restaurant_filters_scatter(){
+					d3.selectAll("input").each(function(d){
+						if(d3.select(this).attr("type") == "checkbox" &&
+						   d3.select(this).attr("name") == "fast_food_scatter" &&
+						   d3.select(this).node().checked){
+							var restaurant = d3.select(this).attr("value");
+							if(contains(restaurant_filter_scatter, restaurant) >= 0){
+								// do nothing
+							}
+							else{
+								restaurant_filter_scatter.push(restaurant)
+							}
+						}
+						else{
+							if(d3.select(this).attr("name") == "fast_food_map"){
+								var restaurant = d3.select(this).attr("value");
+								var index = contains(restaurant_filter_scatter, restaurant)
+								if(index >= 0){
+									restaurant_filter_scatter.splice(index, 1)
+								}
+							}
+						}
+					})
+				}
+	
+				function update_health_encoding_scatter(){
+					d3.selectAll("input").each(function(d){
+						if(d3.select(this).attr("type") == "radio" &&
+							d3.select(this).attr("name") == "health_measure_scatter" &&
+							d3.select(this).node().checked){
+							health_measure_scatter = d3.select(this).attr("value");
+						}
+					})
+				}
+
+
 
 				function filter_restaurant_data(){
 					function filter_by_restaurant(restaurant){
@@ -200,10 +272,26 @@
 
 				// bind actions to filter buttons
 				d3.selectAll("input").on("change", function(){
-					update_restaurant_filters();
-					update_health_encoding();
-					filter_restaurant_data();
-					state_vis.updateVis(filtered_restaurantData, health_measure_selection);
+					if(this.name == "fast_food_map"){
+						update_restaurant_filters_map();
+						filter_restaurant_data();
+						state_vis.updateVis(filtered_restaurantData, health_measure_selection);
+					}
+					if(this.name == "health_measure_map"){
+						update_health_encoding_map();
+						filter_restaurant_data();
+						state_vis.updateVis(filtered_restaurantData, health_measure_selection);
+					}
+					if(this.name == "fast_food_scatter"){
+						update_restaurant_filters_scatter();
+						scatter_vis.wrangleData(restaurant_filter_scatter, health_measure_scatter)
+						scatter_vis.updateVis();
+					}
+					if(this.name == "health_measure_scatter"){
+						update_health_encoding_scatter();
+						scatter_vis.wrangleData(restaurant_filter_scatter, health_measure_scatter)
+						scatter_vis.updateVis();
+					}
 				})
 
                 $(MyEventHandler).bind("selectionChanged", function(event, _selection){
