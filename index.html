@@ -12,10 +12,16 @@
     <script src="libs/queue-master/queue.min.js"></script>
 	<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
     <script src="libs/d3-tip/index.js"></script>
+    <script src="libs/bootstrap-theme/js/jquery.easing.min.js"></script>
+    <script src="libs/bootstrap-theme/js/jquery.fittext.js"></script>
+    <script src="libs/bootstrap-theme/js/wow.min.js"></script>
+    <script src="libs/bootstrap-theme/js/creative.js"></script>
 
     <!--Stylesheets-->
     <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-theme/css/creative.css" >
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-theme/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="css/myStyle.css">
 
     <!-- our vis classes-->
@@ -26,9 +32,77 @@
     <script src = "js/scattervis.js"></script>
 
 </head>
-<body>
 
-    <h1><center>Fast Food and Health in the United States</center></h1>
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#home">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#obesity">Obesity</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#health">Health</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#visualization">Visualization</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- HOME PAGE --> 
+    <header id="home">
+        <div class="header-content">
+            <div class="header-content-inner">
+                <br>
+                <h1>Health and Fast Food in the United States</h1>
+                <p>Andre Souffrant & Martin Reindl - CS 171 Final Project</p>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br>
+                <a href="#obesity" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Obesity Visualization --> 
+    <section class="bg-primary" id="obesity">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Obesity in the United States has been rising steadily</h2> 
+                    <a href="#" class="btn btn-default btn-xl">Health Impacts</a>
+                </div>
+            </div>
+        </div>
+    </section>    
+
+
+
+
+
     <div class="row">
         <div class="col-md-3">
             <div class="col-md-2"></div>
