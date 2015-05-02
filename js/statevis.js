@@ -79,7 +79,11 @@ StateVis.prototype.initVis = function(){
 	// - construct SVG layout
   this.svg = this.parentElement.append("svg")
     .attr("width", this.width + this.margin.left + this.margin.right)
-    .attr("height", this.height + this.margin.top + this.margin.bottom);
+    .attr("height", this.height + this.margin.top + this.margin.bottom)
+	.on("click", function(){
+		if(d3.event.defaultPrevented) 
+			d3.event.stopPropagation();
+	}, true)
 
   // tooltip
   var tip = d3.tip()
