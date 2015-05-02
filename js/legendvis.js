@@ -28,7 +28,7 @@ LegendVis = function(_parentElement, _stateData, _eventHandler){
   this.displayData = [];
 console.log(this.parentElement);
   // constants
-  this.margin = {top: 20, right: 0, bottom: 30, left: 0},
+  this.margin = {top: 0, right: 30, bottom: 0, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
     - this.margin.right,
   this.height = 300 - this.margin.top - this.margin.bottom;
@@ -112,7 +112,7 @@ LegendVis.prototype.updateVis = function(){
       return that.height/2 - that.height/10;
     })
     .attr("width", function(d){
-      return that.width/2;
+      return that.width/4;
     })
     .style("fill", function(d) {
       return that.color(d);
@@ -129,10 +129,10 @@ LegendVis.prototype.updateVis = function(){
   txt.enter()
     .append("text")
     .attr("x", function(d){
-      return that.x(d); 
+      return that.x(d) + 55; 
     })
     .attr("y", function(d){ 
-      return that.height/2;
+      return that.height/2+20;
     })
     .attr("class", "txt")
     .style("font-size","17px")

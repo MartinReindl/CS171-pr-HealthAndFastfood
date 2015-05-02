@@ -31,7 +31,7 @@ ScatterVis = function(_parentElement, _stateData, _eventHandler, _restaurantFilt
 	this.health_measure_selection = _health_measure_selection;
 
     // constants
-    this.margin = {top: 0, right: 100, bottom: 30, left: 0},
+    this.margin = {top: 0, right: 100, bottom: 30, left: 30},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
         - this.margin.right,
     this.height = 300 - this.margin.top - this.margin.bottom;

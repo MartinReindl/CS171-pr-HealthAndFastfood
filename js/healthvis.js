@@ -176,7 +176,7 @@ HealthVis.prototype.updateVis = function(){
   this.svg.select(".x.axis")
     .call(this.xAxis)       
     .selectAll("text")  
-    .style("font-size","8px")
+    .style("font-size","10px")
     .attr("dx", "-.8em")
     .attr("dy", ".75em");
 
