@@ -1,76 +1,135 @@
+/**
+ * structure adapted from CS 171 Homework 3, Spring 2015
+ */
+
+
+/*
+ *
+ * ======================================================
+ * We follow the vis template of init - wrangle - update
+ * ======================================================
+ *
+ * */
 
 /**
  * TimeVis object for CS171 Final Project
- * This is a simple bar graph visualization that shows the prevalance
- * of obesity in the United States over time                    
+ * @param _parentElement -- the HTML or SVG element (D3 node) to which to attach the vis
+ * @param _stateData -- time series data for obesity and some other measures               
  */
+TimeVis = function(_parentElement, _timeData){
 
-// set some variables
-var margin = {top: 50, bottom: 10, left: 50, right: 40};
-var width = 1000 - margin.left - margin.right;
-var height = 1160- margin.top - margin.bottom;
+    // data 
+    this.parentElement = _parentElement;
+    this.timeData = _timeData;
 
-// Creates sources <svg> element and inner g (for margins)
-var svg = d3.select("body").append("svg")
-            .attr("width", width+margin.left+margin.right)
-            .attr("height", height+margin.top+margin.bottom)
-          .append("g")
-            .attr("transform", "translate("+margin.left+","+margin.top+")");
+    // constants
+    this.margin = {top: 50, right: 0, bottom: 50, left: 0},
+    this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
+        - this.margin.right; 
+    this.height = 400 - this.margin.top - this.margin.bottom;
+
+    this.initVis();
+}
 
 
-d3.json("data/obesity.json", function(error, data){
-  // check for error while loading data
-  if (error) { 
-    console.log(error); 
-  } else { 
+/**
+ * Method that sets up the SVG and the variables
+ */
+TimeVis.prototype.initVis = function(){
 
-  // save data to new variable
-  var timeData = data; 
+  // make data and functions available in other scopes
+  var that = this;  
 
-  // x-scale
-  var x = d3.scale.ordinal()
-    .domain([d3.extent(timeData, function (d){return d.year;})])
-    .rangeRoundBands([0, width], .1);
+  // constructs SVG layout
+  this.svg = this.parentElement.append("svg")
+      .attr("width", this.width + this.margin.left + this.margin.right)
+      .attr("height", this.height + this.margin.top + this.margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+ 
+  // creates x scale
+  this.x = d3.scale.ordinal()
+    .domain(that.timeData.map(function(d){return d.year;}))
+    .rangeRoundBands([0, this.width], .1);
 
-  // y-scale
-  var y = d3.scale.linear()
-    .domain([0, height])
+  // create y scale
+  that.y = d3.scale.linear()
+    .domain([0, d3.max(that.timeData, function(d){return d.obesity;})])
+    .range([this.height, 0]);
+
+  // create color scale
+  this.color = d3.scale.quantize()
+    .domain([0, d3.max(that.timeData, function(d){return d.obesity;})])
+    .range(colorbrewer.PuBu[9])
 
   // create axis
-  var xAxis = d3.svg.axis()
-    .scale(x)
+  this.xAxis = d3.svg.axis()
+    .scale(this.x)
     .orient("bottom");
 
-  // data join
+  // Add axes visual elements
+  this.svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + this.height + ")");
+
+  this.svg.select(".x.axis")
+    .call(this.xAxis)     
+    .selectAll("text")  
+    .style("font-size","12px")
+    .style("fill", "white")
+    .style("text-anchor", "middle"); 
+
+  // Data join
   var bar = this.svg.selectAll(".bar")
-    .data(timeData);
+      .data(that.timeData);
 
   // Enter
   bar.enter().append("rect")
 
   // Update
   bar
-    .attr("class","bar");
+    .attr("class","bar")
+    .attr("x", function(d){
+      return that.x(d.year)
+    })
+    .attr("y", function(d){ 
+      return that.y(d.obesity);
+    })
+    .attr("width", this.x.rangeBand())
+    .style("fill", function(d) {
+        return that.color(d.obesity);
+    })
+    .attr("height", function(d) {
+        return that.height - that.y(d.obesity);
+    });
 
   // Remove the extra bars
   bar.exit()
-    .remove();
+      .remove();
 
-  // ensure correct positioning of bars 
-  bar
-    .transition()
+  // Text data join
+  var txt = this.svg.selectAll(".txt")
+    .data(that.timeData);
+
+  // enter
+  txt.enter()
+    .append("text")
     .attr("x", function(d){
-        return that.x(d);
+      return that.x(d.year); 
     })
     .attr("y", function(d){ 
-        return that.y(d);
+      return that.y(d.obesity) - 3;
     })
-    .attr("width", this.x.rangeBand()/3)
-    .style("fill", function(d) {
-        return that.color(d.name);
-    })
-    .attr("height", function(d) {
-        return that.height - that.y(d.data);
-    })
-    .delay(function(d,i){return i * 300;});
+    .attr("class", "txt")
+    .style("font-size","12px")
+    .style("text-anchor", "start")
+    .style("fill", "white");
+
+  // update
+  txt
+    .text(function(d){return d.obesity + "%"});
+
+  // exit
+  txt.exit().remove();
+
 }

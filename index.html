@@ -30,6 +30,7 @@
     <script src = "js/healthvis.js"></script>
     <script src = "js/legendvis.js"></script>
     <script src = "js/scattervis.js"></script>
+    <script src = "js/timevis.js"></script>
 
 </head>
 
@@ -92,7 +93,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Obesity in the United States has been rising steadily</h2> 
+                    <h2 class="section-heading">Obesity in the United States</h2> 
+                    <p>The percentage of obese adults in the United States has been rising steadily over the last decade</p>
+                    <div class="row" id="timeVis">
+                    </div>
                     <a href="#" class="btn btn-default btn-xl">Health Impacts</a>
                 </div>
             </div>
@@ -170,6 +174,7 @@
             var restaurantData = [];
             var mapData = {};
             var stateData = [];
+            var timeData = []; 
 			var health_measure_selection = "Obesity";
 			//var health_measure_scatter = "Obesity";
             var selection1; 
@@ -193,6 +198,7 @@
                 var health_vis = new HealthVis(d3.select("#healthVis"), stateData, MyEventHandler);
                 var legend_vis = new LegendVis(d3.select("#legendVis"), stateData, MyEventHandler);
 				var scatter_vis = new ScatterVis(d3.select("#scatterVis"), stateData, MyEventHandler, restaurant_filter, health_measure_selection);
+                var time_vis = new TimeVis(d3.select("#timeVis"), timeData);
 
 				// helper function to see if an array contains a value
 				function contains(array, value){
@@ -351,7 +357,7 @@
             }
 
             // call this function after both files are loaded -- error should be "null" if no error
-            var dataLoaded = function (error, _restaurantData, _mapData, _stateData) {
+            var dataLoaded = function (error, _restaurantData, _mapData, _stateData,_timeData) {
 
                 if (!error) {
 
@@ -359,6 +365,7 @@
                     restaurantData = _restaurantData;
                     mapData = _mapData; 
                     stateData = _stateData; 
+                    timeData = _timeData;
 
                     // set initial selections
                     selection1 = stateData[22];
@@ -378,10 +385,6 @@
                         }
                     })
 
-                    console.log(restaurantData);
-                    console.log(mapData);
-                    console.log(stateData);
-
                     initVis();
                 }
             }
@@ -392,6 +395,7 @@
                     .defer(d3.csv, 'data/restaurant_locations.csv') 
                     .defer(d3.json, 'data/us.json')
                     .defer(d3.csv, 'data/states.csv')
+                    .defer(d3.csv, 'data/time_series.csv')
                     .await(dataLoaded);
             }
      
