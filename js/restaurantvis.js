@@ -103,13 +103,7 @@ RestaurantVis.prototype.wrangleData= function(_selection1, _selection2){
     this.displayData = [];
 
     // read current category from radiobuttons/checkboxes
-    var categories = [];
-    d3.selectAll("input").each(function(){
-        if(d3.select(this).node().checked){
-            if (this.type == "checkbox" && this.name == "fast_food" ){
-                categories.push(this.value);}
-        }
-    });
+    var categories = ["MD_perCapita", "BK_perCapita", "S_perCapita", "DQ_perCapita"];
 
     // update displayData to new values
     categories.forEach(function (d){
