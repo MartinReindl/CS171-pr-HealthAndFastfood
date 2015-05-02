@@ -75,3 +75,7 @@ p span {
   top: -5%;
   left: 0;
 }
+
+.gray-background {
+    background-color: #00ff00;
+}
