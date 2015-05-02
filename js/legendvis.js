@@ -47,8 +47,8 @@ LegendVis.prototype.initVis = function(){
   this.color = d3.scale.category20();
 
   // create y scale
-  this.y = d3.scale.ordinal()
-    .rangeRoundBands([this.height,0], .1);
+  this.x = d3.scale.ordinal()
+    .rangeRoundBands([0,this.width], .1);
 
   // constructs SVG layout
   this.svg = this.parentElement.append("svg")
@@ -85,7 +85,7 @@ LegendVis.prototype.updateVis = function(){
   var that = this; 
 
   // update scale
-  this.y.domain(this.displayData)
+  this.x.domain(this.displayData)
 
   // Data join
   var bar = this.svg.selectAll(".bar")
@@ -106,10 +106,10 @@ LegendVis.prototype.updateVis = function(){
   bar
     .transition()
     .attr("x", function(d){
-      return that.width/4;
+      return that.x(d); 
     })
     .attr("y", function(d){ 
-      return that.y(d) + 75;
+      return that.height/2 - that.height/10;
     })
     .attr("width", function(d){
       return that.width/2;
@@ -129,10 +129,10 @@ LegendVis.prototype.updateVis = function(){
   txt.enter()
     .append("text")
     .attr("x", function(d){
-      return that.width/2;
+      return that.x(d); 
     })
     .attr("y", function(d){ 
-      return that.y(d) + 70;
+      return that.height/2;
     })
     .attr("class", "txt")
     .style("font-size","17px")
