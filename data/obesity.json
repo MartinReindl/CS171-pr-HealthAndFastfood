@@ -1,0 +1,1973 @@
+{
+"copyright": "(c) World Health Organization",
+"dataset":
+[
+{
+"label": "FCD",
+"display": "FACT_CORE_DATA"
+}
+],
+"attribute":
+[
+{
+"label": "CATEGORY",
+"display": "Category"
+}
+],
+"dimension":
+[
+{
+"label": "GHO",
+"display": "Indicator",
+"isMeasure": true,
+"code":
+[
+{
+"label": "NCD_BMI_25A",
+"display": "BMI >= 25 (age-standardized estimate)",
+"display_sequence": 0,
+"url": "http://apps.who.int/gho/indicatorregistry/App_Main/view_indicator.aspx?iid=2390",
+"attr":
+[
+{
+"category": "CATEGORY",
+"value": "Noncommunicable diseases"
+}
+]
+}
+]
+},
+{
+"label": "PUBLISHSTATE",
+"display": "PUBLISH STATES",
+"isMeasure": false,
+"code":
+[
+{
+"label": "PUBLISHED",
+"display": "Published",
+"display_sequence": 0,
+"url": "",
+"attr":
+[
+]
+}
+]
+},
+{
+"label": "YEAR",
+"display": "Year",
+"isMeasure": false,
+"code":
+[
+{
+"label": "2010",
+"display": "2010",
+"display_sequence": 79900000,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "2014",
+"display": "2014",
+"display_sequence": 79860000,
+"url": "",
+"attr":
+[
+]
+}
+]
+},
+{
+"label": "REGION",
+"display": "WHO region",
+"isMeasure": false,
+"code":
+[
+{
+"label": "AFR",
+"display": "Africa",
+"display_sequence": 10,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "AMR",
+"display": "Americas",
+"display_sequence": 20,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "SEAR",
+"display": "South-East Asia",
+"display_sequence": 30,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "EUR",
+"display": "Europe",
+"display_sequence": 40,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "EMR",
+"display": "Eastern Mediterranean",
+"display_sequence": 50,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "WPR",
+"display": "Western Pacific",
+"display_sequence": 60,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "GLOBAL",
+"display": "Global",
+"display_sequence": 100,
+"url": "",
+"attr":
+[
+]
+}
+]
+},
+{
+"label": "WORLDBANKINCOMEGROUP",
+"display": "World Bank income group",
+"isMeasure": false,
+"code":
+[
+{
+"label": "WB_WORLD_INCOME",
+"display": "Global",
+"display_sequence": 6,
+"url": "",
+"attr":
+[
+]
+}
+]
+},
+{
+"label": "AGEGROUP",
+"display": "Age Group",
+"isMeasure": false,
+"code":
+[
+{
+"label": "YEARS18-PLUS",
+"display": "18+ years",
+"display_sequence": 1800,
+"url": "",
+"attr":
+[
+]
+}
+]
+},
+{
+"label": "SEX",
+"display": "Sex",
+"isMeasure": false,
+"code":
+[
+{
+"label": "MLE",
+"display": "Male",
+"display_sequence": 1,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "FMLE",
+"display": "Female",
+"display_sequence": 2,
+"url": "",
+"attr":
+[
+]
+},
+{
+"label": "BTSX",
+"display": "Both sexes",
+"display_sequence": 3,
+"url": "",
+"attr":
+[
+]
+}
+]
+}
+],
+"fact":
+[
+{
+"fact_id": 10109037,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "21.1 [19-23.4]",
+"numeric": 21.10000,
+"low": 19.00000,
+"high": 23.40000
+}
+},
+{
+"fact_id": 10109040,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "22.9 [20-26]",
+"numeric": 22.90000,
+"low": 20.00000,
+"high": 26.00000
+}
+},
+{
+"fact_id": 10109047,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "28.5 [26.8-30.1]",
+"numeric": 28.50000,
+"low": 26.80000,
+"high": 30.10000
+}
+},
+{
+"fact_id": 10109048,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "30.8 [28.7-32.9]",
+"numeric": 30.80000,
+"low": 28.70000,
+"high": 32.90000
+}
+},
+{
+"fact_id": 10109051,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "35.8 [33.6-38.1]",
+"numeric": 35.80000,
+"low": 33.60000,
+"high": 38.10000
+}
+},
+{
+"fact_id": 10109052,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "REGION",
+"code": "AFR"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "38.6 [35.7-41.8]",
+"numeric": 38.60000,
+"low": 35.70000,
+"high": 41.80000
+}
+},
+{
+"fact_id": 10109078,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+}
+],
+"value":
+{
+"display": "57.8 [55.2-60.4]",
+"numeric": 57.80000,
+"low": 55.20000,
+"high": 60.40000
+}
+},
+{
+"fact_id": 10109080,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "59 [57.1-60.9]",
+"numeric": 59.00000,
+"low": 57.10000,
+"high": 60.90000
+}
+},
+{
+"fact_id": 10109082,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "59.8 [56.3-63.4]",
+"numeric": 59.80000,
+"low": 56.30000,
+"high": 63.40000
+}
+},
+{
+"fact_id": 10109084,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "60.3 [57.7-63]",
+"numeric": 60.30000,
+"low": 57.70000,
+"high": 63.00000
+}
+},
+{
+"fact_id": 10109086,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2014"
+}
+],
+"value":
+{
+"display": "61.3 [58.7-63.8]",
+"numeric": 61.30000,
+"low": 58.70000,
+"high": 63.80000
+}
+},
+{
+"fact_id": 10109088,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "REGION",
+"code": "AMR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+}
+],
+"value":
+{
+"display": "62.8 [59.3-66.2]",
+"numeric": 62.80000,
+"low": 59.30000,
+"high": 66.20000
+}
+},
+{
+"fact_id": 10109109,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "EMR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+}
+],
+"value":
+{
+"display": "41.3 [38.4-44.1]",
+"numeric": 41.30000,
+"low": 38.40000,
+"high": 44.10000
+}
+},
+{
+"fact_id": 10109112,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "EMR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+}
+],
+"value":
+{
+"display": "43.8 [40-47.6]",
+"numeric": 43.80000,
+"low": 40.00000,
+"high": 47.60000
+}
+},
+{
+"fact_id": 10109115,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "EMR"
+}
+],
+"value":
+{
+"display": "44.5 [42.6-46.5]",
+"numeric": 44.50000,
+"low": 42.60000,
+"high": 46.50000
+}
+},
+{
+"fact_id": 10109116,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "REGION",
+"code": "EMR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2014"
+}
+],
+"value":
+{
+"display": "46.8 [44-49.3]",
+"numeric": 46.80000,
+"low": 44.00000,
+"high": 49.30000
+}
+},
+{
+"fact_id": 10109118,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "REGION",
+"code": "EMR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2010"
+}
+],
+"value":
+{
+"display": "47.9 [45.2-50.6]",
+"numeric": 47.90000,
+"low": 45.20000,
+"high": 50.60000
+}
+},
+{
+"fact_id": 10109119,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "REGION",
+"code": "EMR"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+}
+],
+"value":
+{
+"display": "50.1 [46.5-53.6]",
+"numeric": 50.10000,
+"low": 46.50000,
+"high": 53.60000
+}
+},
+{
+"fact_id": 10109138,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "EUR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "53.3 [50.6-55.9]",
+"numeric": 53.30000,
+"low": 50.60000,
+"high": 55.90000
+}
+},
+{
+"fact_id": 10109139,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "EUR"
+}
+],
+"value":
+{
+"display": "54.9 [51.6-58.4]",
+"numeric": 54.90000,
+"low": 51.60000,
+"high": 58.40000
+}
+},
+{
+"fact_id": 10109141,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "EUR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "56.6 [55-58.3]",
+"numeric": 56.60000,
+"low": 55.00000,
+"high": 58.30000
+}
+},
+{
+"fact_id": 10109143,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "EUR"
+}
+],
+"value":
+{
+"display": "58.6 [56.3-60.8]",
+"numeric": 58.60000,
+"low": 56.30000,
+"high": 60.80000
+}
+},
+{
+"fact_id": 10109145,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "EUR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+}
+],
+"value":
+{
+"display": "60.1 [57.7-62.5]",
+"numeric": 60.10000,
+"low": 57.70000,
+"high": 62.50000
+}
+},
+{
+"fact_id": 10109148,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "REGION",
+"code": "EUR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2014"
+}
+],
+"value":
+{
+"display": "62.6 [59.4-65.8]",
+"numeric": 62.60000,
+"low": 59.40000,
+"high": 65.80000
+}
+},
+{
+"fact_id": 10109167,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "35.9 [34.1-37.8]",
+"numeric": 35.90000,
+"low": 34.10000,
+"high": 37.80000
+}
+},
+{
+"fact_id": 10109169,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+}
+],
+"value":
+{
+"display": "36.6 [35.3-37.8]",
+"numeric": 36.60000,
+"low": 35.30000,
+"high": 37.80000
+}
+},
+{
+"fact_id": 10109171,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "37.3 [35.6-39.1]",
+"numeric": 37.30000,
+"low": 35.60000,
+"high": 39.10000
+}
+},
+{
+"fact_id": 10109173,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+}
+],
+"value":
+{
+"display": "38.5 [36.1-41.2]",
+"numeric": 38.50000,
+"low": 36.10000,
+"high": 41.20000
+}
+},
+{
+"fact_id": 10109175,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "39 [37.3-40.7]",
+"numeric": 39.00000,
+"low": 37.30000,
+"high": 40.70000
+}
+},
+{
+"fact_id": 10109176,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "REGION",
+"code": "GLOBAL"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "WORLDBANKINCOMEGROUP",
+"code": "WB_WORLD_INCOME"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "39.6 [37.2-42.1]",
+"numeric": 39.60000,
+"low": 37.20000,
+"high": 42.10000
+}
+},
+{
+"fact_id": 10109181,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+}
+],
+"value":
+{
+"display": "17 [14.3-20]",
+"numeric": 17.00000,
+"low": 14.30000,
+"high": 20.00000
+}
+},
+{
+"fact_id": 10109184,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+}
+],
+"value":
+{
+"display": "19.3 [15.3-23.8]",
+"numeric": 19.30000,
+"low": 15.30000,
+"high": 23.80000
+}
+},
+{
+"fact_id": 10109185,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "19.8 [17.8-21.7]",
+"numeric": 19.80000,
+"low": 17.80000,
+"high": 21.70000
+}
+},
+{
+"fact_id": 10109195,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+}
+],
+"value":
+{
+"display": "22.2 [19.3-25.4]",
+"numeric": 22.20000,
+"low": 19.30000,
+"high": 25.40000
+}
+},
+{
+"fact_id": 10109197,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "22.7 [19.9-25.7]",
+"numeric": 22.70000,
+"low": 19.90000,
+"high": 25.70000
+}
+},
+{
+"fact_id": 10109199,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "SEAR"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+}
+],
+"value":
+{
+"display": "25.3 [21.3-29.7]",
+"numeric": 25.30000,
+"low": 21.30000,
+"high": 29.70000
+}
+},
+{
+"fact_id": 10109336,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+}
+],
+"value":
+{
+"display": "28.2 [24.3-32.2]",
+"numeric": 28.20000,
+"low": 24.30000,
+"high": 32.20000
+}
+},
+{
+"fact_id": 10109338,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+}
+],
+"value":
+{
+"display": "29.3 [26.7-32.2]",
+"numeric": 29.30000,
+"low": 26.70000,
+"high": 32.20000
+}
+},
+{
+"fact_id": 10109340,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2010"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+}
+],
+"value":
+{
+"display": "30.3 [26.5-34.3]",
+"numeric": 30.30000,
+"low": 26.50000,
+"high": 34.30000
+}
+},
+{
+"fact_id": 10109342,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "SEX",
+"code": "FMLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "YEAR",
+"code": "2014"
+}
+],
+"value":
+{
+"display": "31.2 [25.9-36.8]",
+"numeric": 31.20000,
+"low": 25.90000,
+"high": 36.80000
+}
+},
+{
+"fact_id": 10109344,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+},
+{
+"category": "SEX",
+"code": "BTSX"
+},
+{
+"category": "YEAR",
+"code": "2014"
+}
+],
+"value":
+{
+"display": "33 [28.7-37.3]",
+"numeric": 33.00000,
+"low": 28.70000,
+"high": 37.30000
+}
+},
+{
+"fact_id": 10109346,
+"dataset": "FCD",
+"effective_date": "2015-02-24",
+"end_date": "2900-12-31",
+"published": true,
+"Dim":
+[
+{
+"category": "PUBLISHSTATE",
+"code": "PUBLISHED"
+},
+{
+"category": "REGION",
+"code": "WPR"
+},
+{
+"category": "YEAR",
+"code": "2014"
+},
+{
+"category": "GHO",
+"code": "NCD_BMI_25A"
+},
+{
+"category": "SEX",
+"code": "MLE"
+},
+{
+"category": "AGEGROUP",
+"code": "YEARS18-PLUS"
+}
+],
+"value":
+{
+"display": "34.7 [29.3-40.5]",
+"numeric": 34.70000,
+"low": 29.30000,
+"high": 40.50000
+}
+}
+]
+}
