@@ -58,10 +58,10 @@ ScatterVis.prototype.initVis = function(){
    
     // creates x scale
     this.x = d3.scale.linear()
-			.range([5, this.width-5])
+			.range([30, this.width-5])
     // create y scale
     that.y = d3.scale.linear()
-            .range([this.height-5, 5]);
+            .range([this.height-20, 5]);
 
     // create color scale
 	//this.color = d3.scale.category20();
@@ -83,6 +83,18 @@ ScatterVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
 
+	this.svg.append("text")
+		.attr("y", this.height-5)
+		.attr("x", 300)
+		.style("font-size", "10px")
+		.text("Number of Selected Restaurants per Million")
+
+	this.svg.append("text")
+		.attr("y", 300)
+		.attr("x", 80)
+		.style("font-size", "10px")
+		.attr("transform", "rotate(270 "+10+","+300+")")
+		.text("Perctentage Diagnosed Selected Health Measure")
     // call the wrangle data method
     this.wrangleData(this.restaurant_filter, this.health_measure_selection)
 

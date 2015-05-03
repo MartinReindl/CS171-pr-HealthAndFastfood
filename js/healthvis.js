@@ -29,10 +29,10 @@ HealthVis = function(_parentElement, _stateData, _eventHandler){
   this.displayData = [];
 
   // constants
-  this.margin = {top: 0, right: 0, bottom: 30, left: 0},
+  this.margin = {top: 0, right: 30, bottom: 30, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
     - this.margin.right,
-  this.height = 250 - this.margin.top - this.margin.bottom;
+  this.height = 200 - this.margin.top - this.margin.bottom;
   this.centered;
 
   this.initVis();
@@ -176,7 +176,7 @@ HealthVis.prototype.updateVis = function(){
   this.svg.select(".x.axis")
     .call(this.xAxis)       
     .selectAll("text")  
-    .style("font-size","10px")
+    .style("font-size","12px")
     .attr("dx", "-.8em")
     .attr("dy", ".75em");
 
