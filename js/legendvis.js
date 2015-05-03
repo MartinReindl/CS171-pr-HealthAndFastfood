@@ -31,7 +31,7 @@ console.log(this.parentElement);
   this.margin = {top: 0, right: 30, bottom: 0, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
     - this.margin.right,
-  this.height = 300 - this.margin.top - this.margin.bottom;
+  this.height = 100 - this.margin.top - this.margin.bottom;
   this.centered;
 
   this.initVis();

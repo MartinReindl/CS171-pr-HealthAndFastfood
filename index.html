@@ -98,6 +98,16 @@
             </div>
         </div>
     </section>    
+    <section class="bg-primary" id="obesity">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Obesity in the United States has been rising steadily</h2> 
+                    <a href="#" class="btn btn-default btn-xl">Health Impacts</a>
+                </div>
+            </div>
+        </div>
+    </section>    
 
 
 
@@ -105,36 +115,14 @@
 
     <div class="row">
         <div class="col-md-3">
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-11">
-				<h2>Change Map and Scatterplot</h2>
-				Select Fast Food Chains to Display on Map and Scatterplot:<br>
-				<input type="checkbox" name="fast_food" class="event"
-				id="Starbucks_map" value="Starbucks" checked/>
-				<label for="Starbucks">Starbucks</label>
-				<br>
-				<input type="checkbox" name="fast_food" class="event"
-				id="McDonalds_map" value="McDonalds" checked/>
-				<label for="McDonalds">McDonald's</label>
-				<br>
-				<input type="checkbox" name="fast_food" class="event"
-				id="BurgerKing_map" value="BurgerKing" checked/>
-				<label for="BurgerKing">Burger King</label>
-				<br>
-				<input type="checkbox" name="fast_food" class="event"
-				id="DairyQueen_map" value="DQ" checked/>
-				<label for="DairyQueen">Dairy Queen</label>
-				<br>
-				Select Health Measure to Visualize on Map and Scatterplot:
-				<br>
-				<input type="radio" name="health_measure" value="Obesity" checked> Overweightness<br>
-				<input type="radio" name="health_measure" 
-					   value="Cardiovascular Disease"> Cardiovascular Disease<br>
-				<input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
-				<input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
-				<br>
-			</div>
+			<h2>Fast Food and Health</h2>
+			This is an interactive visualization that allows you to explore the 
+			relationship between fast food restaurant locations and measures of
+			poor health. Use the controls below to change the restaurants and 
+			health measures displayed on the map and scatter plot. Hover over
+			states on map to see the corresponding point on the scatterplot and 
+			vice-versa. Click on states on the map to update the selections shown
+			in the bar charts to see more detailed information about that state. 
 		</div>
         <div class="col-md-5" id="stateVis">
         </div>
@@ -147,7 +135,43 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-8" id="scatterVis">
+		<div class="col-md-3">
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-11">
+				<h3>Change Map and Scatterplot</h3>
+				<div class="col-md-6">
+					Select Fast Food Chains<br>
+					<input type="checkbox" name="fast_food" class="event"
+					id="Starbucks_map" value="Starbucks" checked/>
+					<label for="Starbucks">Starbucks</label>
+					<br>
+					<input type="checkbox" name="fast_food" class="event"
+					id="McDonalds_map" value="McDonalds" checked/>
+					<label for="McDonalds">McDonald's</label>
+					<br>
+					<input type="checkbox" name="fast_food" class="event"
+					id="BurgerKing_map" value="BurgerKing" checked/>
+					<label for="BurgerKing">Burger King</label>
+					<br>
+					<input type="checkbox" name="fast_food" class="event"
+					id="DairyQueen_map" value="DQ" checked/>
+					<label for="DairyQueen">Dairy Queen</label>
+					<br>
+				</div>
+				<div class="col-md-6">
+					Select Health Measure:
+					<br>
+					<input type="radio" name="health_measure" value="Obesity" checked> Overweightness<br>
+					<input type="radio" name="health_measure" 
+						   value="Cardiovascular Disease"> Cardiovascular Disease<br>
+					<input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
+					<input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
+					<br>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5" id="scatterVis">
 		</div>
 		<div class='col-sm-4' id='healthVis'>
 			<center><h2><b>Health Measures</b></h2></center>
