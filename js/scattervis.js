@@ -63,9 +63,6 @@ ScatterVis.prototype.initVis = function(){
     that.y = d3.scale.linear()
             .range([this.height-20, 5]);
 
-    // create color scale
-	//this.color = d3.scale.category20();
-
     // create axis
     this.xAxis = d3.svg.axis()
       .scale(this.x)
@@ -266,7 +263,7 @@ ScatterVis.prototype.updateVis = function(){
 			return "blue";        	
 		})
 		.attr("opacity", 0.7)
-
+		
 	// set up the linear trendline
 	var x_series = []
 	var y_series = []
