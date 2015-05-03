@@ -59,6 +59,14 @@ StateVis = function(_parentElement, _restaurantData, _mapData, _stateData, _even
  */
 StateVis.prototype.initVis = function(){
 
+	  // tooltip
+  this.tip = d3.tip()
+    .attr("class", "d3-tip")
+    .direction("s")
+    .html(function (d) { 
+      return that.display_tip(d);
+    });
+
 	// make this available for function calls
   var that = this; 
 
@@ -85,16 +93,8 @@ StateVis.prototype.initVis = function(){
 			d3.event.stopPropagation();
 	}, true)
 
-  // tooltip
-  var tip = d3.tip()
-    .attr("class", "d3-tip")
-    .direction("s")
-    .html(function (d) { 
-      return that.display_tip(d);
-    });
-
   // initialize tooltip
-  this.svg.call(tip)
+  this.svg.call(that.tip)
 
 	this.g = this.svg.append("g");
 	
@@ -131,9 +131,8 @@ StateVis.prototype.initVis = function(){
 		.on("dblclick", function (d) {that.doubleClicked (d)})
 		.on("click", function (d) {that.clicked (d)})
 		// Show and hide tip on mouse events
-		.on('mouseover', tip.show)
-		.on('mouseout', tip.hide);
-
+		//.on('mouseover', tip.show)
+		//.on('mouseout', tip.hide);
 
     this.g.append("path")
         .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))
@@ -165,6 +164,22 @@ StateVis.prototype.initVis = function(){
 			if(d["Restaurant"] == "DQ")
 				return "red"
 		})
+
+	
+	// create another transparent map to display over the points for hover
+	this.g.append("g")
+    	.attr("id", "states_transparent")
+		.selectAll("path")
+		.data(topojson.feature(that.mapData, that.mapData.objects.states).features)
+		.enter().append("path")
+		.attr("d", that.path)
+		.attr("opacity", 0)
+		.attr("class", "states")
+		.on("dblclick", function (d) {that.doubleClicked (d)})
+		.on("click", function (d) {that.clicked (d)})
+		// Show and hide tip on mouse events
+		.on('mouseover', that.tip.show)
+		.on('mouseout', that.tip.hide);
 }
 
 
@@ -246,6 +261,27 @@ StateVis.prototype.updateVis = function(filtered_restaurant_data, health_measure
 
 	// remove points that aren't needed anymore
 	points.exit().remove()
+
+	
+	// remove and re add transparent map
+	d3.select("#states_transparent").remove()
+
+	// create another transparent map to display over the points for hover
+	this.g.append("g")
+    	.attr("id", "states_transparent")
+		.selectAll("path")
+		.data(topojson.feature(that.mapData, that.mapData.objects.states).features)
+		.enter().append("path")
+		.attr("d", that.path)
+		.attr("opacity", 0)
+		.attr("class", "states")
+		.on("dblclick", function (d) {that.doubleClicked (d)})
+		.on("click", function (d) {that.clicked (d)})
+		// Show and hide tip on mouse events
+		.on('mouseover', that.tip.show)
+		.on('mouseout', that.tip.hide);
+
+
 }
 
 /*
