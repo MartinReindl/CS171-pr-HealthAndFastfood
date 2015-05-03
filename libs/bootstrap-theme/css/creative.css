@@ -54,7 +54,9 @@ p {
 .bg-primary {
     background-color: #f05f40;
 }
-
+.bg-secondary {
+    background-color: #F1C40F;
+}
 .bg-dark {
     color: #fff;
     background-color: #222;

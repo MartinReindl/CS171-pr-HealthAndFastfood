@@ -76,6 +76,13 @@ p span {
   left: 0;
 }
 
-.gray-background {
-    background-color: #00ff00;
+.bg-secondary {
+  background-color: #F1C40F;
+  color: #ffffff;
 }
+
+.bg-contact {
+  background-color: #2DCC70;
+  color: #ffffff;
+}
+
