@@ -31,7 +31,7 @@ ScatterVis = function(_parentElement, _stateData, _eventHandler, _restaurantFilt
 	this.health_measure_selection = _health_measure_selection;
 
     // constants
-    this.margin = {top: 0, right: 100, bottom: 30, left: 30},
+    this.margin = {top: 0, right: 100, bottom: 50, left: 50},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
         - this.margin.right,
     this.height = 300 - this.margin.top - this.margin.bottom;
@@ -58,10 +58,10 @@ ScatterVis.prototype.initVis = function(){
    
     // creates x scale
     this.x = d3.scale.linear()
-			.range([30, this.width-5])
+			.range([3, this.width-3])
     // create y scale
     that.y = d3.scale.linear()
-            .range([this.height-20, 5]);
+            .range([this.height-3, 3]);
 
     // create axis
     this.xAxis = d3.svg.axis()
@@ -81,18 +81,19 @@ ScatterVis.prototype.initVis = function(){
         .attr("class", "y axis")
 
 	this.svg.append("text")
-		.attr("y", this.height-5)
-		.attr("x", 300)
+		.attr("y", this.height+40)
+		.attr("x", this.width/2-100)
 		.style("font-size", "10px")
 		.text("Number of Selected Restaurants per Million")
 
 	this.svg.append("text")
-		.attr("y", 300)
+		.attr("y", 250)
 		.attr("x", 80)
 		.style("font-size", "10px")
 		.attr("transform", "rotate(270 "+10+","+300+")")
-		.text("Perctentage Diagnosed Selected Health Measure")
-    // call the wrangle data method
+		.text("Percentage Diagnosed Selected Health Measure")
+    
+	// call the wrangle data method
     this.wrangleData(this.restaurant_filter, this.health_measure_selection)
 
     // call the update method
@@ -226,14 +227,10 @@ ScatterVis.prototype.updateVis = function(){
   	// updates axis
     this.svg.select(".x.axis")
         .call(this.xAxis)	    
-        .selectAll("text")  
-        .style("font-size","17px")
-        .attr("dx", "-.8em")
-        .attr("dy", ".75em");
 		
 	this.svg.select(".y.axis")
         .call(this.yAxis);
-    
+
 	// Data join
     var point = this.svg.selectAll(".point")
         .data(that.displayData);
