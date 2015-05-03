@@ -287,45 +287,7 @@
 					})
 				}
 
-/*
-				// helper function to change restaurant filters when checkbox is checked
-				function update_restaurant_filters_scatter(){
-					d3.selectAll("input").each(function(d){
-						if(d3.select(this).attr("type") == "checkbox" &&
-						   d3.select(this).attr("name") == "fast_food_scatter" &&
-						   d3.select(this).node().checked){
-							var restaurant = d3.select(this).attr("value");
-							if(contains(restaurant_filter_scatter, restaurant) >= 0){
-								// do nothing
-							}
-							else{
-								restaurant_filter_scatter.push(restaurant)
-							}
-						}
-						else{
-							if(d3.select(this).attr("name") == "fast_food_map"){
-								var restaurant = d3.select(this).attr("value");
-								var index = contains(restaurant_filter_scatter, restaurant)
-								if(index >= 0){
-									restaurant_filter_scatter.splice(index, 1)
-								}
-							}
-						}
-					})
-				}
-	
-				function update_health_encoding_scatter(){
-					d3.selectAll("input").each(function(d){
-						if(d3.select(this).attr("type") == "radio" &&
-							d3.select(this).attr("name") == "health_measure_scatter" &&
-							d3.select(this).node().checked){
-							health_measure_scatter = d3.select(this).attr("value");
-						}
-					})
-				}
-
-*/
-
+				// function that filters the restaurant data
 				function filter_restaurant_data(){
 					function filter_by_restaurant(restaurant){
 						if (contains(restaurant_filter, restaurant["Restaurant"]) >= 0){
@@ -342,26 +304,11 @@
 				d3.selectAll("input").on("change", function(){
 					if(this.name == "fast_food"){
 						update_restaurant_filters();
-						//filter_restaurant_data();
-						//state_vis.updateVis(filtered_restaurantData, health_measure_selection);
 					}
 					if(this.name == "health_measure"){
 						update_health_encoding();
-						//filter_restaurant_data();
-						//state_vis.updateVis(filtered_restaurantData, health_measure_selection);
 					}
-					/*
-					if(this.name == "fast_food_scatter"){
-						update_restaurant_filters_scatter();
-						scatter_vis.wrangleData(restaurant_filter, health_measure_selection)
-						scatter_vis.updateVis();
-					}
-					if(this.name == "health_measure_scatter"){
-						update_health_encoding_scatter();
-						scatter_vis.wrangleData(restaurant_filter_scatter, health_measure_scatter)
-						scatter_vis.updateVis();
-					}
-					*/
+
 					filter_restaurant_data();
 					state_vis.updateVis(filtered_restaurantData, health_measure_selection);	
 					scatter_vis.wrangleData(restaurant_filter, health_measure_selection)
