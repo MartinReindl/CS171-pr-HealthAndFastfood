@@ -116,14 +116,26 @@
     </section>    
     <div class="row">
         <div class="col-md-3">
-			<h2>Fast Food and Health</h2>
-			This is an interactive visualization that allows you to explore the 
-			relationship between fast food restaurant locations and measures of
-			poor health. Use the controls below to change the restaurants and 
-			health measures displayed on the map and scatter plot. Hover over
-			states on map to see the corresponding point on the scatterplot and 
-			vice-versa. Click on states on the map to update the selections shown
-			in the bar charts to see more detailed information about that state. 
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-11">
+				<h2>Fast Food and Health</h2>
+				<font size="1">
+					This is an interactive visualization that allows you to explore the 
+					relationship between fast food restaurant locations and measures of
+					poor health. Use the radio controls below to change the health measures displayed 
+					on the map and scatterplot. Each state in the map is colored based on the percentage 
+					of adults diagnosed with the selected health measure. The dots correspond to the 
+					geographic locations of individual restaurants (color coded by restaurant name). 
+					The scatterplot shows the relationship between per capita number of restaurants (x-axis) 
+					and the percentage of adults diagnosed with the selected health measure (y-axis). 
+					Each point in the scatterplot corresponds to a state. The line represents a linear 
+					regression in an attempt to more explicitly show the relationship. Use the checkboxes below
+					to filter the restaurants to be displayed on the map and to be factored into the per capita 
+					number of restaurants in the scatterplot. Click on states on the map to update the selections 
+					shown in the bar charts to see more detailed information about that state. 
+				</font>
+			</div>
 		</div>
         <div class="col-md-5" id="stateVis">
         </div>
@@ -163,7 +175,7 @@
 				<div class="col-md-6">
 					Select Health Measure:
 					<br>
-					<input type="radio" name="health_measure" value="Obesity" checked> Overweightness<br>
+					<input type="radio" name="health_measure" value="Obesity" checked> Obesity<br>
 					<input type="radio" name="health_measure" 
 						   value="Cardiovascular Disease"> Cardiovascular Disease<br>
 					<input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
