@@ -91,6 +91,11 @@ p span {
   color: #ffffff;
 }
 
+.bg-video {
+  background-color: #EB5255;
+  color: #ffffff;
+}
+
 #visualization {
   padding-bottom: 0px; 
 }
