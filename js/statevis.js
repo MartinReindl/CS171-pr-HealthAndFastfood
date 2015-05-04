@@ -130,9 +130,6 @@ StateVis.prototype.initVis = function(){
 		.attr("class", "states")
 		.on("dblclick", function (d) {that.doubleClicked (d)})
 		.on("click", function (d) {that.clicked (d)})
-		// Show and hide tip on mouse events
-		//.on('mouseover', tip.show)
-		//.on('mouseout', tip.hide);
 
     this.g.append("path")
         .datum(topojson.mesh(that.mapData, that.mapData.objects.states, function(a, b) { return a !== b; }))

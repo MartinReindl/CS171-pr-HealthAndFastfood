@@ -90,3 +90,7 @@ p span {
   background-color: #3598DB;
   color: #ffffff;
 }
+
+#visualization {
+  padding-bottom: 0px; 
+}

@@ -29,10 +29,10 @@ HealthVis = function(_parentElement, _stateData, _eventHandler){
   this.displayData = [];
 
   // constants
-  this.margin = {top: 0, right: 30, bottom: 30, left: 0},
+  this.margin = {top: 0, right: 50, bottom: 30, left: 40},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
     - this.margin.right,
-  this.height = 200 - this.margin.top - this.margin.bottom;
+  this.height = 250 - this.margin.top - this.margin.bottom;
   this.centered;
 
   this.initVis();
@@ -104,13 +104,7 @@ HealthVis.prototype.wrangleData= function(_selection1, _selection2){
 
   // read current category from radiobuttons/checkboxes
   var categories = [];
-  /*d3.selectAll("input").each(function(){
-      if(d3.select(this).node().checked){
-          if (this.type == "checkbox" && this.name == "health_measure" ){
-              categories.push(this.value);}
-      }
-  });
-*/
+
 	categories = ["Obesity", "Diabetes", "Cardiovascular Disease", "Mental Health"]
 
   // update displayData to new values
@@ -139,15 +133,6 @@ HealthVis.prototype.wrangleData= function(_selection1, _selection2){
     selection2["data"] = _selection2[d]; 
     category.push(selection2); 
 
-    // rename objects for better labeling 
-    category.forEach(function (d){
-        switch (d.health_measure){
-            case "mental_health": d.health_measure = "Mental Health"; break;
-            case "obesity": d.health_measure = "Obesity"; break;
-            case "diabetes": d.health_measure = "Diabetes"; break;
-            case "cardiovascular_disease": d.health_measure = "Cardiovascular Disease"; 
-        }
-    })
 
     // update displayData
     that.displayData = that.displayData.concat(category);  
@@ -176,9 +161,10 @@ HealthVis.prototype.updateVis = function(){
   this.svg.select(".x.axis")
     .call(this.xAxis)       
     .selectAll("text")  
-    .style("font-size","12px")
+    .style("font-size","10px")
     .attr("dx", "-.8em")
-    .attr("dy", ".75em");
+    .attr("dy", ".75em")
+    .attr("text-anchor", "end");
 
   this.svg.select(".y.axis")
     .call(this.yAxis);
