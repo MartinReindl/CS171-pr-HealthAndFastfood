@@ -82,6 +82,13 @@ RestaurantVis.prototype.initVis = function(){
     this.svg.append("g")
         .attr("class", "y axis")
 
+     this.svg.append("text")
+        .attr("y", 250)
+        .attr("x", 160)
+        .style("font-size", "10px")
+        .attr("transform", "rotate(270 "+20+","+300+")")
+        .text("Restaurants per Million")
+
     // call the wrangle data method
     this.wrangleData(this.stateData[22], this.stateData[44])
 
