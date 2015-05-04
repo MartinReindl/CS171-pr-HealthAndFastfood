@@ -169,6 +169,13 @@ HealthVis.prototype.updateVis = function(){
   this.svg.select(".y.axis")
     .call(this.yAxis);
 
+	this.svg.append("text")
+		.attr("y", 250)
+		.attr("x", 100)
+		.style("font-size", "10px")
+		.attr("transform", "rotate(270 "+20+","+300+")")
+		.text("Percentage Diagnosed Selected Health Measure")
+    
   // Data join
   var bar = this.svg.selectAll(".bar")
     .data(that.displayData);
