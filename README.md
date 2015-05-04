@@ -25,7 +25,7 @@ We used a number of libraries in our code:
 ## URLs
 Our project website can be found <a href="http://www.healthandfastfood.website">here</a>.
 
-Our project screencast can be found embedded in our website and <a href="">on youtube<a>. 
+Our project screencast can be found embedded in our website and <a href="https://youtu.be/iTMWu7XD9Cg">on youtube<a>. 
 
 ## Interface
 Overall our interface is relatively simple to understand. As outlined in our process book, the interface consists of a scrollable story, our main visualization, and the video at the end: 
