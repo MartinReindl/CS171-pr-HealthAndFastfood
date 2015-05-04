@@ -26,7 +26,7 @@ LegendVis = function(_parentElement, _stateData, _eventHandler){
   this.parentElement = _parentElement;
   this.stateData = _stateData;
   this.displayData = [];
-console.log(this.parentElement);
+
   // constants
   this.margin = {top: 0, right: 30, bottom: 0, left: 0},
   this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 

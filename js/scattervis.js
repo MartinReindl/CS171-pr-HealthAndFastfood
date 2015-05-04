@@ -163,8 +163,6 @@ function linearRegression(y,x){
 
 // function that returns y given a linear regression and x value
 function return_y(lr, x){
-	console.log(lr['slope'])
-	console.log(lr['intercept'])
 	var y = lr['slope']*x+lr['intercept']
 	return y;
 }

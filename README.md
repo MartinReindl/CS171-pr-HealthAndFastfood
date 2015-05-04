@@ -9,7 +9,7 @@ This README file gives an overview of what we are handing in. It also explains t
 #### CSS
 We have a number of CSS files. The only file we actively worked on is myStyle.css, which can be found in the "css" folder
 
-### JavaScript
+#### JavaScript
 We have several JavaScript files. All files within the "js" folder were written by us. Of course we searched the internet for help with problems, and used a fair amount of code from other sources(e.g. from Mike Bostock). When large chunks of code were copied from an online source, we mentioned it in comments directly above the code. 
 
 #### Data
