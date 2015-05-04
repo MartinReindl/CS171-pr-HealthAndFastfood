@@ -86,3 +86,16 @@ p span {
   color: #ffffff;
 }
 
+.bg-health {
+  background-color: #3598DB;
+  color: #ffffff;
+}
+
+.bg-video {
+  background-color: #EB5255;
+  color: #ffffff;
+}
+
+#visualization {
+  padding-bottom: 0px; 
+}

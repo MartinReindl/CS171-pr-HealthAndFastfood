@@ -31,48 +31,12 @@
     <script src = "js/legendvis.js"></script>
     <script src = "js/scattervis.js"></script>
     <script src = "js/timevis.js"></script>
+    <script src = "js/healthbubblevis.js"></script>
+
 
 </head>
 
 <body id="page-top">
-
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="#home">Home</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#obesity">Obesity</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#health">Health</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#visualization">Visualization</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
 
     <!-- HOME PAGE --> 
     <header id="home">
@@ -108,41 +72,62 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Fast Food in the United States</h2> 
-                    <p>The number of fast food restaurants in the United States has risen to unprecedented levels</p>
+                    <p>The number of fast food restaurants in the United States has similarly risen to surprising levels</p>
                     <center><img src="../libs/bootstrap-theme/img/franchises.jpg" alt="franchise"></center>
                 </div>
             </div>
         </div>
     </section>    
+
+    <!-- HEALTH VISUALIZATION --> 
+    <section class="bg-health">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Health in the United States</h2>
+                    <p>Science suggests that high fast food consumption is the cause of poor health outcomes in the United States</p>
+                    <div class="row" id="healthBubbleVis"></div>
+                    <p> This graph shows the percentage of the adult population with the respective diseases (CD = Cardiovascular Disease)<p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>    
+
+    <!-- MAIN VISUALIZATION --> 
+    <section id="visualization">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-heading text-center">Fast Food Restaurants and Health by Geographic Location</h2> 
+
+
     <div class="row">
         <div class="col-md-3">
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-11">
-				<h2>Fast Food and Health</h2>
+				<h2>Fast Food & Health</h2>
 				<font size="1">
 					This is an interactive visualization that allows you to explore the 
 					relationship between fast food restaurant locations and measures of
-					poor health. Use the radio controls below to change the health measures displayed 
-					on the map and scatterplot. Each state in the map is colored based on the percentage 
-					of adults diagnosed with the selected health measure. The dots correspond to the 
-					geographic locations of individual restaurants (color coded by restaurant name). 
-					The scatterplot shows the relationship between number of restaurants per million (x-axis) 
-					and the percentage of adults diagnosed with the selected health measure (y-axis). 
+					health. Use the radio controls below to change the health measures displayed 
+					on the map and scatterplot. 
+                    <br> 
+                    Each state in the map is colored based on the percentage 
+					of adults diagnosed with the selected health measure. The dots correspond to individual restaurants.
+					The scatterplot shows the relationship between number of restaurants  
+					and the percentage of adults diagnosed with the selected health measure. 
 					Each point in the scatterplot corresponds to a state. The line represents a linear 
-					regression in an attempt to more explicitly show the relationship. Use the checkboxes below
-					to filter the restaurants to be displayed on the map and to be factored into the  
-					number of restaurants per million in the scatterplot. Click on states on the map to update the selections 
-					shown in the bar charts to see more detailed information about that state. 
+					regression to show overall trends. Use the checkboxes below	to filter the restaurants to be displayed on the map and to be factored into the  
+					number of restaurants per million in the scatterplot. Click on states to update the selections shown in the bar charts. 
 				</font>
 			</div>
 		</div>
         <div class="col-md-5" id="stateVis">
-			<center><h3><b>Fast Food Restaurants and Health by Geographic Location</b></h3></center>
         </div>
       	<div class='col-sm-4'> 
 			<div class='row' id='restaurantVis'>
-            	<center><h3><b>Fast Food Restaurants</b></h3></center>
+            	<center><h2>Fast Food Restaurants</h2></center>
         	</div>
 			<br>
 			<br>
@@ -154,48 +139,50 @@
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-			<div class="col-md-1">
+			<center><h2>Change Map and Scatterplot</h2></center>
+			<div class="col-md-6">
+				<b>Select Fast Food Chains</b><br>
+				<input type="checkbox" name="fast_food" class="event"
+				id="Starbucks_map" value="Starbucks" checked/> Starbucks<br>
+				<input type="checkbox" name="fast_food" class="event"
+				id="McDonalds_map" value="McDonalds" checked/> McDonald's<br>
+				<input type="checkbox" name="fast_food" class="event"
+				id="BurgerKing_map" value="BurgerKing" checked/>
+				Burger King<br>
+				<input type="checkbox" name="fast_food" class="event"
+				id="DairyQueen_map" value="DQ" checked/> Dairy Queen<br>
 			</div>
-			<div class="col-md-11">
-				<h3>Change Map and Scatterplot</h3>
-				<div class="col-md-6">
-					Select Fast Food Chains<br>
-					<input type="checkbox" name="fast_food" class="event"
-					id="Starbucks_map" value="Starbucks" checked/>
-					<label for="Starbucks">Starbucks</label>
-					<br>
-					<input type="checkbox" name="fast_food" class="event"
-					id="McDonalds_map" value="McDonalds" checked/>
-					<label for="McDonalds">McDonald's</label>
-					<br>
-					<input type="checkbox" name="fast_food" class="event"
-					id="BurgerKing_map" value="BurgerKing" checked/>
-					<label for="BurgerKing">Burger King</label>
-					<br>
-					<input type="checkbox" name="fast_food" class="event"
-					id="DairyQueen_map" value="DQ" checked/>
-					<label for="DairyQueen">Dairy Queen</label>
-					<br>
-				</div>
-				<div class="col-md-6">
-					Select Health Measure:
-					<br>
-					<input type="radio" name="health_measure" value="Obesity" checked> Obesity<br>
-					<input type="radio" name="health_measure" 
-						   value="Cardiovascular Disease"> Cardiovascular Disease<br>
-					<input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
-					<input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
-					<br>
-				</div>
+			<div class="col-md-6">
+				<b>Select Health Measure:</b>
+				<br>
+				<input type="radio" name="health_measure" value="Obesity" checked> Obesity<br>
+				<input type="radio" name="health_measure" 
+					   value="Cardiovascular Disease">Cardiovascular Disease<br>
+				<input type="radio" name="health_measure" value="Diabetes"> Diabetes<br>
+				<input type="radio" name="health_measure" value="Mental Health"> Mental Health<br>
+				<br>
 			</div>
 		</div>
 		<div class="col-md-5" id="scatterVis">
-            <center><h3><b>Restaurants per Million vs Percentage Diagnosed</b></h3></center>
 		</div>
 		<div class='col-sm-4' id='healthVis'>
-			<center><h3><b>Health Measures</b></h3></center>
+			<center><h2>Health Measures</h2></center>
 		</div>
 	</div>
+
+    <!-- VIDEO SECTION --> 
+    <section class="bg-video">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Project Screen-Cast</h2>
+                    <p>Watch this video to see a walkthrough of our website</p>
+                    <iframe width="600" height="430" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>                
+                </div>
+            </div>
+        </div>
+    </section>    
+
 
     <!-- CONTACT SECTION --> 
     <section id="contact" class="bg-contact">
@@ -258,6 +245,7 @@
                 var legend_vis = new LegendVis(d3.select("#legendVis"), stateData, MyEventHandler);
 				var scatter_vis = new ScatterVis(d3.select("#scatterVis"), stateData, MyEventHandler, restaurant_filter, health_measure_selection);
                 var time_vis = new TimeVis(d3.select("#timeVis"), timeData);
+                var healthbubble_vis = new HealthBubbleVis(d3.select("#healthBubbleVis"), stateData);
 
 				// helper function to see if an array contains a value
 				function contains(array, value){
@@ -411,7 +399,6 @@
             d3.selectAll("input").on("click", function (){
                 $(MyEventHandler).trigger("selectionChanged", "checkbox");
             });
-
         })
     </script>
 </body>

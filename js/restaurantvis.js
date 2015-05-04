@@ -32,7 +32,7 @@ RestaurantVis = function(_parentElement, _stateData, _eventHandler){
     this.margin = {top: 20, right: 30, bottom: 20, left: 40},
     this.width = this.parentElement[0][0]["clientWidth"] - this.margin.left 
         - this.margin.right,
-    this.height = 200 - this.margin.top - this.margin.bottom;
+    this.height = 250 - this.margin.top - this.margin.bottom;
     this.centered;
 
     this.initVis();
